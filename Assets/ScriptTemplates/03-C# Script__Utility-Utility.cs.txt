@@ -1,0 +1,14 @@
+/*
+
+*/
+
+using QFramework;
+
+namespace TheaterOfKismet
+{
+   [AutoRegister]
+   public class #SCRIPTNAME# : IUtility
+   {
+        #NOTRIM#
+   }
+}

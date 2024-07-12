@@ -1,0 +1,17 @@
+/*
+
+*/
+
+using QFramework;
+
+namespace TheaterOfKismet
+{
+   [AutoRegister]
+   public class #SCRIPTNAME# : AbstractModel
+   {
+      protected override void OnInit()
+      {
+          #NOTRIM#
+      }
+   }
+}
