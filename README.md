@@ -3,4 +3,4 @@ This is a game which we made in the ciga game jam in 2024, and this is the unity
 ## Editor Verison
 Unity Editor 2021.3.34f1
 ## godot verison
-[text](https://github.com/AlyName/CiGA_GJ_2024)
+[TheaterOfKismet](https://github.com/AlyName/CiGA_GJ_2024)
