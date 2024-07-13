@@ -1,6 +1,7 @@
 
 
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
@@ -29,18 +30,18 @@ namespace ZToolKit.Editor
             mSaveFolder = GameSave.SaveFolderDic[ResTool.Load<GameConfig>(nameof(GameConfig)).saveFolder];
         }
 
-        public override void DrawPanel()
+        public override void DrawPanel(Rect windowRect)
         {
             mCanSaveInEditor = EditorGUILayout.Toggle("编辑器中保留存档", mCanSaveInEditor);
             EditorPrefs.SetBool(EditorPrefsKeys.CanSaveInEditor, mCanSaveInEditor);
             mLoadSaveInEditor = EditorGUILayout.Toggle("编辑器中读取存档", mLoadSaveInEditor);
             EditorPrefs.SetBool(EditorPrefsKeys.LoadSaveInEditor, mLoadSaveInEditor);
 
-            if (GUILayout.Button("打开存档位置", EditorStyles.miniButton))
+            if (GUILayout.Button("打开存档位置", EditorStyles.miniButton, GUILayout.Width(200)))
             {
                 if (!File.Exists(mSaveFolder))
                     Directory.CreateDirectory(mSaveFolder);
-                System.Diagnostics.Process.Start(mSaveFolder);
+                Process.Start(mSaveFolder);
             }
         }
     }

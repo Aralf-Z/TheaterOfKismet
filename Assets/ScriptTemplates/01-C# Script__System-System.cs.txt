@@ -6,7 +6,6 @@ using QFramework;
 
 namespace TheaterOfKismet
 {
-   [AutoRegister]
    public class #SCRIPTNAME# : AbstractSystem
    {
       protected override void OnInit()

@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82e99a3feaa70b04f90cce201790bd2d, type: 3}
   m_Name: GameConfig
   m_EditorClassIdentifier: 
-  saveFolder: 2
+  saveFolder: 1

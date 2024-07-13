@@ -15,12 +15,12 @@ namespace ZToolKit.Editor
         private PanelBase[] mPanels;
         private Vector2 mScrollBtn;
 
-        [MenuItem("ZToolKit/ToolPanel #P", false, 1)]
+        [MenuItem("ZToolKit/ToolPanel #Z", false, 1)]
         private static void OpenSelf()
         {
             var w = GetWindow<PanelWindow>("ConfigPanel");
-            w.maxSize = new(360, 540);
-            w.minSize = w.maxSize;
+            w.maxSize = new Vector2(810, 810);
+            w.minSize = new Vector2(540, 540);
         }
 
         private void OnEnable()
@@ -46,14 +46,18 @@ namespace ZToolKit.Editor
             mScrollBtn = GUILayout.BeginScrollView(mScrollBtn, GUILayout.Width(position.width), GUILayout.Height(position.height));
             
             var titleFont = new GUIStyle {fontSize = 15, normal = new GUIStyleState{textColor = Color.cyan}};
-            
+            var curWinRect = position;
+
             foreach (var p in mPanels)
             {
                 using (new GUILayout.VerticalScope("HelpBox"))
                 {
+                    GUILayout.Space(5);
                     GUILayout.Label(p.PanelName, titleFont);
-                    p.DrawPanel();
+                    p.DrawPanel(curWinRect);
+                    GUILayout.Space(5);
                 }
+                GUILayout.Space(10);
             }
             
             GUILayout.EndScrollView();

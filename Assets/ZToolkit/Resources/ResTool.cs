@@ -21,7 +21,13 @@ namespace ZToolKit
 
         public static T Load<T>(string prefabName) where T : Object
         {
-            return Resources.Load<T>(rNamePathDic[prefabName]);
+            if (rNamePathDic.ContainsKey(prefabName))
+            {
+                return Resources.Load<T>(rNamePathDic[prefabName]);
+            }
+            
+            LogTool.LogError($"ResLoad---Failed To Load {prefabName}");
+            return null;
         }
     }
 }

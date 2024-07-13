@@ -13,7 +13,7 @@ namespace ZToolKit
 {
     public static class GameSave
     {
-        public static Dictionary<SaveFolder, string> SaveFolderDic = new()
+        public static readonly Dictionary<SaveFolder, string> SaveFolderDic = new()
         {
             [SaveFolder.Device] = Path.Combine(Application.persistentDataPath, "Save"),
             [SaveFolder.Game] = Path.Combine(Application.dataPath, "Save"),
@@ -24,7 +24,10 @@ namespace ZToolKit
         public static TSave LoadGame<TSave >() where TSave : new()
         {
 #if UNITY_EDITOR
-            if(!EditorPrefs.GetBool(EditorPrefsKeys.LoadSaveInEditor)) return new TSave ();
+            if (!EditorPrefs.GetBool(EditorPrefsKeys.LoadSaveInEditor))
+            {
+                return new TSave ();
+            }
 #endif
             return LoadSave<TSave>();
         }
@@ -42,7 +45,7 @@ namespace ZToolKit
             var savePath = GetSavePath();
             
             File.WriteAllText(savePath, saveJson);
-            Debug.Log("Game saved successfully!");
+            LogTool.LogConfig("GameSave","Game saved successfully!");
         }
 
         private static TSave LoadSave<TSave>() where TSave: new()
@@ -62,8 +65,12 @@ namespace ZToolKit
 
         private static TSave LoadSave<TSave>(string filePath) where TSave: new()
         {
-            if (!File.Exists(filePath)) return new TSave();
-            string saveJson = File.ReadAllText(filePath);
+            if (!File.Exists(filePath))
+            {
+                return new TSave();
+            }
+            
+            var saveJson = File.ReadAllText(filePath);
             return JsonConvert.DeserializeObject<TSave>(saveJson);
         }
         
@@ -71,13 +78,20 @@ namespace ZToolKit
         {
             var path = SaveFolderDic[SaveFolder.Game];
             var gameConfig = ResTool.Load<GameConfig>(nameof(GameConfig));
-            
+
             if (gameConfig)
-                path = SaveFolderDic[gameConfig.saveFolder];
+            {
+                path = SaveFolderDic[gameConfig.saveFolder]; 
+            }
             else
-                Debug.LogError("Failed To Load GameConfig");
+            {
+                LogTool.Log("ResLoad", "Failed To Load GameConfig", Color.red);
+            }
             
-            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
 
             return Path.Combine(path, kSaveFile);
         }
