@@ -833,7 +833,7 @@ namespace QFramework {
 #if USING_UNITY
 				Debug.LogWarning
 #else
-				Debug.WriteLine
+				Debug.Log
 #endif
 					(string.Format("Improper JSON formatting:{0}", numericString));
 			}
@@ -1379,7 +1379,7 @@ namespace QFramework {
 #if USING_UNITY
 					Debug.LogError
 #else
-					Debug.WriteLine
+					Debug.Log
 #endif
 						("Cannot merge arrays when right object has more elements");
 					return;
@@ -1813,7 +1813,7 @@ namespace QFramework {
 #if USING_UNITY
 				Debug.Log
 #else
-				Debug.WriteLine
+				Debug.Log
 #endif
 					("Tried to turn non-Object JSONObject into a dictionary");
 
@@ -1846,7 +1846,7 @@ namespace QFramework {
 #if USING_UNITY
 						Debug.LogWarning
 #else
-						Debug.WriteLine
+						Debug.Log
 #endif
 							(string.Format("Omitting object: {0} in dictionary conversion", Keys[index]));
 						break;

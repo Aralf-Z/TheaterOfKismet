@@ -165,7 +165,7 @@ namespace MoonSharp.Interpreter.Interop
 					if (m_Cache[i] != null && CheckMatch(obj != null, args, m_Cache[i]))
 					{
 #if DEBUG_OVERLOAD_RESOLVER
-						System.Diagnostics.Debug.WriteLine(string.Format("[OVERLOAD] : CACHED! slot {0}, hits: {1}", i, m_CacheHits));
+						System.Diagnostics.Debug.Log(string.Format("[OVERLOAD] : CACHED! slot {0}, hits: {1}", i, m_CacheHits));
 #endif
 						return m_Cache[i].Method.Execute(script, obj, context, args);
 					}
@@ -396,7 +396,7 @@ namespace MoonSharp.Interpreter.Interop
 			}
 
 #if DEBUG_OVERLOAD_RESOLVER
-			System.Diagnostics.Debug.WriteLine(string.Format("[OVERLOAD] : Score {0} for method {1}", totalScore, method.SortDiscriminant));
+			System.Diagnostics.Debug.Log(string.Format("[OVERLOAD] : Score {0} for method {1}", totalScore, method.SortDiscriminant));
 #endif
 			return totalScore;
 		}

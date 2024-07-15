@@ -21,6 +21,9 @@ namespace TheaterOfKismet
              var saveUtility = this.GetUtility<SaveUtility>();
              
              saveUtility.LoadGame();
+
+             var game = new GameObject("Game");
+             game.AddComponent<Game>();
          }
           
          public IArchitecture GetArchitecture()

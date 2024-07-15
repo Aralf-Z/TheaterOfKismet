@@ -189,7 +189,7 @@ namespace MoonSharp.Interpreter.Execution.VM
 				{
 					found = true;
 
-					//System.Diagnostics.Debug.WriteLine(string.Format("BRK: found {0} for {1} on contains", srf, srf.Type));
+					//System.Diagnostics.Debug.Log(string.Format("BRK: found {0} for {1} on contains", srf, srf.Type));
 
 					if (state == null)
 						srf.Breakpoint = !srf.Breakpoint;
@@ -228,7 +228,7 @@ namespace MoonSharp.Interpreter.Execution.VM
 
 				if (nearest != null)
 				{
-					//System.Diagnostics.Debug.WriteLine(string.Format("BRK: found {0} for {1} on distance {2}", nearest, nearest.Type, minDistance));
+					//System.Diagnostics.Debug.Log(string.Format("BRK: found {0} for {1} on distance {2}", nearest, nearest.Type, minDistance));
 
 					if (state == null)
 						nearest.Breakpoint = !nearest.Breakpoint;

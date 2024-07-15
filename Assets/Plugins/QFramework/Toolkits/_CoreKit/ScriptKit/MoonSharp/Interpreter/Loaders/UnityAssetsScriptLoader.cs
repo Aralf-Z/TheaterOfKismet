@@ -103,7 +103,7 @@ namespace MoonSharp.Interpreter.Loaders
 #if !(PCL || ENABLE_DOTNET || NETFX_CORE)
 				Console.WriteLine("Error initializing UnityScriptLoader : {0}", ex);
 #endif
-				System.Diagnostics.Debug.WriteLine(string.Format("Error initializing UnityScriptLoader : {0}", ex));
+				System.Diagnostics.Debug.Log(string.Format("Error initializing UnityScriptLoader : {0}", ex));
 			}
 		}
 #endif
