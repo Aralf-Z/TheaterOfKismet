@@ -19,15 +19,23 @@ namespace ZToolKit.Editor
         public override string PanelName => "[编辑器] Luban设置";
 
         private string mLubanPath;
+        private string mLubanDataPath;
         
         public override void Init()
         {
             mLubanPath = EditorPrefs.GetString(EditorPrefsKeys.LubanPath);
+            mLubanDataPath = EditorPrefs.GetString(EditorPrefsKeys.LubanDataPath);
             
             if (mLubanPath == string.Empty)
             {
                 //默认位置
                 mLubanPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Config");
+            }
+            
+            if (mLubanDataPath == string.Empty)
+            {
+                //默认位置
+                mLubanDataPath = Path.Combine(Directory.GetParent(Application.dataPath).FullName, "Config", "Data");
             }
         }
 
@@ -64,6 +72,37 @@ namespace ZToolKit.Editor
                 } 
             }
 
+            using (var h = new GUILayout.HorizontalScope())
+            {
+                GUILayout.TextField(mLubanDataPath, GUILayout.Width(windowRect.width * 2 / 3));
+                
+                GUILayout.Space(5);
+                
+                GUILayout.FlexibleSpace();
+                
+                if (GUILayout.Button("选择数据表位置", EditorStyles.miniButton, GUILayout.Width(100)))
+                {
+                    var path = EditorUtility.OpenFolderPanel("路径", mLubanDataPath, "");
+                    mLubanDataPath = path == string.Empty ? mLubanDataPath : path;
+                    EditorPrefs.SetString(EditorPrefsKeys.LubanDataPath, mLubanDataPath);
+                }
+                
+                GUILayout.Space(5);
+                
+                if (GUILayout.Button("打开数据表位置", EditorStyles.miniButton, GUILayout.Width(100)))
+                {
+                    try
+                    {
+                        Process.Start(mLubanDataPath);
+                    }
+                    catch (Exception e)
+                    {
+                        LogTool.LogError(e);
+                        throw;
+                    }
+                } 
+            }
+            
             // if (GUILayout.Button("执行Luban", EditorStyles.miniButton))
             // {
             //     ExecuteBatFile(Path.Combine(mLubanPath, "gen.bat"));

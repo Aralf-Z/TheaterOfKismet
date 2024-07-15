@@ -2,6 +2,8 @@
 
 */
 
+using UnityEngine;
+
 #if UNITY_EDITOR
 
 namespace ZToolKit
@@ -9,11 +11,12 @@ namespace ZToolKit
     public static class EditorPrefsKeys
     {
         //saveConfig
-        public const string CanSaveInEditor = "CanSaveInEditor";
-        public const string LoadSaveInEditor = "LoadSaveInEditor";
+        public static string CanSaveInEditor => Application.productName + "CanSaveInEditor";
+        public static string LoadSaveInEditor => Application.productName + "LoadSaveInEditor";
         
         //lubanConfig
-        public const string LubanPath = "LubanPath";
+        public static string LubanPath => Application.productName + "LubanPath";
+        public static string LubanDataPath => Application.productName + "LubanDataPath";
     }
 }
 
