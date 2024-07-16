@@ -174,8 +174,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7474795085577611818}
+  - component: {fileID: 1249788423801977767}
   - component: {fileID: 7321326474619004253}
-  - component: {fileID: 4981574579256612891}
+  - component: {fileID: 1613031521753131190}
   m_Layer: 5
   m_Name: DragArea
   m_TagString: Untagged
@@ -203,6 +204,36 @@ RectTransform:
   m_AnchoredPosition: {x: 0.00018310547, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &1249788423801977767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6600381787380018464}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 0}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &7321326474619004253
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,19 +253,11 @@ MonoBehaviour:
   PrefabFolder: Assets/Res/Prefab
   ArchitectureFullTypeName: TheaterOfKismet.GameCore
   ViewControllerFullTypeName: 
---- !u!114 &4981574579256612891
-MonoBehaviour:
+--- !u!222 &1613031521753131190
+CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6600381787380018464}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  MarkType: 0
-  CustomComponentName: DragArea
-  CustomComment: 
-  mComponentName: TheaterOfKismet.MainUI_DragArea
+  m_CullTransparentMesh: 1
