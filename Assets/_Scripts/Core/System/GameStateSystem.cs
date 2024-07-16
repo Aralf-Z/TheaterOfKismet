@@ -7,12 +7,12 @@ using UnityEngine;
 
 namespace TheaterOfKismet
 {
-    public enum Gamestate
+    public enum GameStateLabel
     {
+        None,
         Prolog,
         Start,
         StartSettings,
-        VideoSetting,
         GameInit,
         LevelInit,
         InLevel,
@@ -28,7 +28,7 @@ namespace TheaterOfKismet
             
         }
 
-        public Gamestate now_state = Gamestate.Start;
+        public GameStateLabel now_state = GameStateLabel.Start;
         public CardEvent now_event = null;
         public LevelManager now_level = null;
         public int now_level_num = 0;
@@ -45,18 +45,18 @@ namespace TheaterOfKismet
 
         void check_state()
         {
-            if (now_state == Gamestate.Prolog)
+            if (now_state == GameStateLabel.Prolog)
             {
                 if (now_event != null)
                 {
                     if (now_event.event_type == CardEvent.Type.GameStart)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Start);
+                        get_in_state(GameStateLabel.Start);
                     }
                 }
             }
-            else if (now_state == Gamestate.Start)
+            else if (now_state == GameStateLabel.Start)
             {
                 if (now_event != null)
                 {
@@ -64,7 +64,7 @@ namespace TheaterOfKismet
                     {
                         event_discard();
                         Particles.get_particles().card_explode(MouseInput.get_mouse_input().mouse_pos, 200);
-                        get_in_state(Gamestate.GameInit);
+                        get_in_state(GameStateLabel.GameInit);
                     }
                     else if (now_event.event_type == CardEvent.Type.GameEnd)
                     {
@@ -73,40 +73,40 @@ namespace TheaterOfKismet
                     else if (now_event.event_type == CardEvent.Type.Settings)
                     {
                         event_discard();
-                        get_in_state(Gamestate.StartSettings);
+                        get_in_state(GameStateLabel.StartSettings);
                     }
                 }
             }
-            else if (now_state == Gamestate.GameInit)
+            else if (now_state == GameStateLabel.GameInit)
             {
-                get_in_state(Gamestate.LevelInit);
+                get_in_state(GameStateLabel.LevelInit);
             }
-            else if (now_state == Gamestate.LevelInit)
+            else if (now_state == GameStateLabel.LevelInit)
             {
-                get_in_state(Gamestate.InLevel);
+                get_in_state(GameStateLabel.InLevel);
             }
-            else if (now_state == Gamestate.InLevel)
+            else if (now_state == GameStateLabel.InLevel)
             {
                 if (now_event != null)
                 {
                     if (now_event.event_type == CardEvent.Type.Settings)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Settings);
+                        get_in_state(GameStateLabel.Settings);
                     }
                     else if (now_event.event_type == CardEvent.Type.GetIntoNextLevel)
                     {
                         event_discard();
-                        get_in_state(Gamestate.NextLevel);
+                        get_in_state(GameStateLabel.NextLevel);
                     }
                     else if (now_event.event_type == CardEvent.Type.GameOver)
                     {
                         event_discard();
-                        get_in_state(Gamestate.GameOver);
+                        get_in_state(GameStateLabel.GameOver);
                     }
                 }
             }
-            else if (now_state == Gamestate.NextLevel)
+            else if (now_state == GameStateLabel.NextLevel)
             {
                 if (now_event != null)
                 {
@@ -114,20 +114,20 @@ namespace TheaterOfKismet
                     {
                         event_discard();
                         now_level_num++;
-                        get_in_state(Gamestate.LevelInit);
+                        get_in_state(GameStateLabel.LevelInit);
                     }
                     else if (now_event.event_type == CardEvent.Type.GameEnd)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Start);
+                        get_in_state(GameStateLabel.Start);
                     }
                 }
             }
-            else if (now_state == Gamestate.GameOver)
+            else if (now_state == GameStateLabel.GameOver)
             {
-                get_in_state(Gamestate.Start);
+                get_in_state(GameStateLabel.Start);
             }
-            else if (now_state == Gamestate.Settings)
+            else if (now_state == GameStateLabel.Settings)
             {
                 if (now_event != null)
                 {
@@ -135,28 +135,28 @@ namespace TheaterOfKismet
                     {
                         event_discard();
                         CardWheel.get_wheel().return_cards();
-                        get_in_state(Gamestate.InLevel);
+                        get_in_state(GameStateLabel.InLevel);
                     }
                     else if (now_event.event_type == CardEvent.Type.GameEnd)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Start);
+                        get_in_state(GameStateLabel.Start);
                     }
                 }
             }
-            else if (now_state == Gamestate.StartSettings)
+            else if (now_state == GameStateLabel.StartSettings)
             {
                 if (now_event != null)
                 {
                     if (now_event.event_type == CardEvent.Type.Continue)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Start);
+                        get_in_state(GameStateLabel.Start);
                     }
                     else if (now_event.event_type == CardEvent.Type.GameEnd)
                     {
                         event_discard();
-                        get_in_state(Gamestate.Start);
+                        get_in_state(GameStateLabel.Start);
                     }
                     // TODO
                     // else if(now_event.event_type==CardEvent.Type.VideoSetting){
@@ -176,7 +176,7 @@ namespace TheaterOfKismet
 
         void do_state()
         {
-            if (now_state == Gamestate.Start)
+            if (now_state == GameStateLabel.Start)
             {
                 if (now_event != null)
                 {
@@ -188,7 +188,7 @@ namespace TheaterOfKismet
                     }
                 }
             }
-            else if (now_state == Gamestate.InLevel)
+            else if (now_state == GameStateLabel.InLevel)
             {
                 // TODO
                 //UI.get_ui().set_label_b_number(now_level.round_score);
@@ -219,7 +219,7 @@ namespace TheaterOfKismet
                     Main.get_main().wait_time_add_event(1f, ne);
                 }
             }
-            else if (now_state == Gamestate.Settings || now_state == Gamestate.StartSettings)
+            else if (now_state == GameStateLabel.Settings || now_state == GameStateLabel.StartSettings)
             {
                 if (now_event != null)
                 {
@@ -250,15 +250,15 @@ namespace TheaterOfKismet
                 }
             }
 
-            if (now_state != Gamestate.InLevel)
+            if (now_state != GameStateLabel.InLevel)
             {
                 //UI.get_ui().set_label_bottom_a_number(-1);
             }
         }
 
-        public void get_in_state(Gamestate next_state)
+        public void get_in_state(GameStateLabel next_state)
         {
-            if (next_state == Gamestate.Prolog)
+            if (next_state == GameStateLabel.Prolog)
             {
                 now_state = next_state;
                 CardWheel.get_wheel().clear_cards();
@@ -266,7 +266,7 @@ namespace TheaterOfKismet
                 //UI.get_ui().hide_all();
                 //todo proLog Main.get_main().GetNode<Prolog>("UISprites/Prolog").start_prolog();
             }
-            else if (next_state == Gamestate.Start)
+            else if (next_state == GameStateLabel.Start)
             {
                 now_state = next_state;
                 CardWheel.get_wheel().clear_cards();
@@ -279,7 +279,7 @@ namespace TheaterOfKismet
                 AudioManager.Instance.PlaySound(AudioEnum.MainMenu);
                 //UI.get_ui().display_title();
             }
-            else if (next_state == Gamestate.StartSettings)
+            else if (next_state == GameStateLabel.StartSettings)
             {
                 //UI.get_ui().hide_all();
                 now_state = next_state;
@@ -291,7 +291,7 @@ namespace TheaterOfKismet
                 AudioManager.Instance.PlaySound(AudioEnum.Setting);
                 //UI.get_ui().hide_title();
             }
-            else if (next_state == Gamestate.GameInit)
+            else if (next_state == GameStateLabel.GameInit)
             {
                 CardWheel.get_wheel().clear_cards();
                 CardWheel.get_wheel().clear_stack();
@@ -300,17 +300,17 @@ namespace TheaterOfKismet
                 AudioManager.Instance.PlaySound(AudioEnum.Game);
                 //UI.get_ui().hide_title();
             }
-            else if (next_state == Gamestate.LevelInit)
+            else if (next_state == GameStateLabel.LevelInit)
             {
                 CardWheel.get_wheel().clear_cards();
                 CardWheel.get_wheel().clear_stack();
                 now_level = new LevelManager(now_level_num);
             }
-            else if (next_state == Gamestate.InLevel)
+            else if (next_state == GameStateLabel.InLevel)
             {
                 //UI.get_ui().show_all();
             }
-            else if (next_state == Gamestate.Settings)
+            else if (next_state == GameStateLabel.Settings)
             {
                 //UI.get_ui().hide_all();
                 now_state = next_state;
@@ -321,7 +321,7 @@ namespace TheaterOfKismet
                 CardWheel.get_wheel().rotate_to(0);
                 AudioManager.Instance.PlaySound(AudioEnum.Setting);
             }
-            else if (next_state == Gamestate.NextLevel)
+            else if (next_state == GameStateLabel.NextLevel)
             {
                 CardGenerator.get_generator().generate_card("NextLevel");
             }
@@ -376,7 +376,7 @@ namespace TheaterOfKismet
 
         public int get_duplicate_times()
         {
-            if (now_state == Gamestate.InLevel)
+            if (now_state == GameStateLabel.InLevel)
             {
                 if (now_level == null) return 0;
                 else if (now_level.effect_manager == null) return 0;
@@ -394,7 +394,7 @@ namespace TheaterOfKismet
             return true;
         }
 
-        void event_discard()
+        public void event_discard()
         {
             now_event = null;
         }

@@ -3,6 +3,7 @@
 */
 
 using QFramework;
+using TheaterOfKismet.UI;
 using UnityEngine;
 
 namespace TheaterOfKismet
@@ -24,6 +25,9 @@ namespace TheaterOfKismet
 
              var game = new GameObject("Game");
              game.AddComponent<Game>();
+
+             var gameUpdate = new GameObject("GameUpdate");
+             gameUpdate.AddComponent<GameUpdate>();
          }
           
          public IArchitecture GetArchitecture()

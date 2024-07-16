@@ -19,8 +19,8 @@ namespace ZToolKit.Editor
         private static void OpenSelf()
         {
             var w = GetWindow<PanelWindow>("ConfigPanel");
-            w.maxSize = new Vector2(810, 810);
-            w.minSize = new Vector2(540, 540);
+            w.maxSize = new Vector2(900, 900);
+            w.minSize = new Vector2(630, 450);
         }
 
         private void OnEnable()

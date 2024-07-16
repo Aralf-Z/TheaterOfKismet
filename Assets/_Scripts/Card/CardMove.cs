@@ -7,11 +7,10 @@ using TheaterOfKismet;
 public class CardMove: MonoBehaviour, 
 IController
 {
-	
 	public int card_id,card_pos;
 	private Vector2 _initialPosition;
 	private bool _dragging=false;
-	// private Timer _returnTimer;
+	private Timer _returnTimer;
 	// public Label card_label;
 	//
 	// public AnimatedSprite2D animated;

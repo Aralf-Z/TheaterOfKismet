@@ -41,3 +41,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: BackGroud
+    uniqueID: 3806412321
+    locked: 0
+  - name: HidingCard
+    uniqueID: 4258083461
+    locked: 0
+  - name: ShowingCard
+    uniqueID: 2389032775
+    locked: 0

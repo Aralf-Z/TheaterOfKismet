@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Setting
   m_EditorClassIdentifier: 
   Namespace: TheaterOfKismet
-  ScriptDir: Assets/Scripts/Game
-  PrefabDir: Assets/Art/Prefab
+  ScriptDir: Assets/_Scripts/Game
+  PrefabDir: Assets/Res/Prefab
