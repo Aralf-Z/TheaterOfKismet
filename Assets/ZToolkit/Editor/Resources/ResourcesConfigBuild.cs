@@ -28,7 +28,7 @@ namespace ZToolKit.Editor
             }
             EditorUtility.ClearProgressBar();
             CreateAllResPathData(resConfig);
-            Debug.Log("资源路径配置完成.");
+            LogTool.LogConfig("Resources","资源路径配置完成");
         }
 
         private static void CreateAllResPathData(AllResourcesNamePathPairs data)

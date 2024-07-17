@@ -43,7 +43,7 @@ namespace ZToolKit.Editor
         {
             using (var h = new GUILayout.HorizontalScope())
             {
-                GUILayout.TextField(mLubanPath, GUILayout.Width(windowRect.width * 2 / 3));
+                GUILayout.TextField(mLubanPath, GUILayout.Width(windowRect.width * 5 / 9));
                 
                 GUILayout.Space(5);
                 
@@ -74,7 +74,7 @@ namespace ZToolKit.Editor
 
             using (var h = new GUILayout.HorizontalScope())
             {
-                GUILayout.TextField(mLubanDataPath, GUILayout.Width(windowRect.width * 2 / 3));
+                GUILayout.TextField(mLubanDataPath, GUILayout.Width(windowRect.width * 5 / 9));
                 
                 GUILayout.Space(5);
                 
