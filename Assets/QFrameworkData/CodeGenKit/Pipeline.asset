@@ -18,13 +18,16 @@ MonoBehaviour:
     GameObject: {fileID: 0}
     From: 0
     NameToFullName: []
-    BindInfos: []
-    ScriptsFolder: Assets/_Scripts/UI/ChildComponent
-    ClassName: MainUI_DragArea
-    Namespace: TheaterOfKismet.UI
-    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace TheaterOfKismet.UI\r\n{\r\n\tpublic
-      partial class MainUI_DragArea : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
+    BindInfos:
+    - TypeName: CardView
+      PathToRoot: View
+      MemberName: View
+    ScriptsFolder: Assets/_Scripts/Game
+    ClassName: Card
+    Namespace: TheaterOfKismet
+    MainCode: "using UnityEngine;\r\nusing QFramework;\r\n\r\nnamespace TheaterOfKismet\r\n{\r\n\tpublic
+      partial class Card : ViewController\r\n\t{\r\n\t\tvoid Start()\r\n\t\t{\r\n\t\t\t//
       Code Here\r\n\t\t}\r\n\t}\r\n}\r\n"
-    DesignerCode: "// Generate Id:68d0e4be-1977-47c9-a543-c19835573c53\r\nusing UnityEngine;\r\n\r\nnamespace
-      TheaterOfKismet.UI\r\n{\r\n\tpublic partial class MainUI_DragArea : QFramework.IController\r\n\t{\r\n\r\n\t\tQFramework.IArchitecture
-      QFramework.IBelongToArchitecture.GetArchitecture()=>TheaterOfKismet.GameCore.Interface;\r\n\t}\r\n}\r\n"
+    DesignerCode: "// Generate Id:0a42aac9-39b0-4a67-817c-27264ae0d032\r\nusing UnityEngine;\r\n\r\nnamespace
+      TheaterOfKismet\r\n{\r\n\tpublic partial class Card : QFramework.IController\r\n\t{\r\n\r\n\t\tpublic
+      CardView View;\r\n\r\n\t\tQFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>TheaterOfKismet.GameCore.Interface;\r\n\t}\r\n}\r\n"

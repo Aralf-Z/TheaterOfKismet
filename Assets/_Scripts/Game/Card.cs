@@ -7,17 +7,18 @@ namespace TheaterOfKismet
 	{
 		void Start()
 		{
-			
-		}
+			var model = this.GetModel<MainModel>();
 
-		/// <summary>
-		/// 设置显示
-		/// </summary>
-		/// <param name="showing"></param>
-		public void SetShowing(bool showing)
-		{
-			CardFace.sortingLayerName = showing ? "ShowingCard" : "HidingCard";
-			Frame.sortingLayerName = showing ? "ShowingCard" : "HidingCard";
+			model.dragDelta.Register(delta =>
+			{
+				var screenPos = UnityEngine.Camera.main.WorldToScreenPoint(transform.position);
+				var wheelPosX = 
+					Mathf.Clamp(screenPos.x + delta.x, -model.wheelXMin, model.wheelXMax);
+				var wheelPosY = model.cardWheel.GetYFromX(wheelPosX);
+
+				transform.position =
+					UnityEngine.Camera.main.ScreenToWorldPoint(new Vector3(wheelPosX, wheelPosY.yMax));
+			});
 		}
 	}
 }

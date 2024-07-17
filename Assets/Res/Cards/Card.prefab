@@ -52,8 +52,7 @@ MonoBehaviour:
   PrefabFolder: Assets/Res/Cards
   ArchitectureFullTypeName: TheaterOfKismet.GameCore
   ViewControllerFullTypeName: 
-  Frame: {fileID: 3598855398852819029}
-  CardFace: {fileID: 65532049715481396}
+  View: {fileID: 7023912116160340561}
 --- !u!1 &5985770288756832745
 GameObject:
   m_ObjectHideFlags: 0
@@ -63,6 +62,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8361621980846816170}
+  - component: {fileID: 7023912116160340561}
+  - component: {fileID: 7735751249965449897}
   m_Layer: 0
   m_Name: View
   m_TagString: Untagged
@@ -87,6 +88,43 @@ Transform:
   m_Father: {fileID: 4299487891415831634}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7023912116160340561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985770288756832745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df5968c71938ac74ebe1cbf7aebdc16e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Namespace: TheaterOfKismet
+  ScriptName: CardView
+  ScriptsFolder: Assets/_Scripts/Game
+  GeneratePrefab: 0
+  PrefabFolder: Assets/Res/Prefab
+  ArchitectureFullTypeName: TheaterOfKismet.GameCore
+  ViewControllerFullTypeName: 
+  Frame: {fileID: 3598855398852819029}
+  CardFace: {fileID: 65532049715481396}
+--- !u!114 &7735751249965449897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5985770288756832745}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d51f3a7c41ab0346b49ae50d456bece, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MarkType: 1
+  CustomComponentName: CardView
+  CustomComment: 
+  mComponentName: TheaterOfKismet.CardView
 --- !u!1 &7669488160862910346
 GameObject:
   m_ObjectHideFlags: 0
@@ -99,7 +137,7 @@ GameObject:
   - component: {fileID: 65532049715481396}
   - component: {fileID: 2364863486712105153}
   m_Layer: 0
-  m_Name: CardFace
+  m_Name: Face
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -158,8 +196,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1905934521
-  m_SortingLayer: 3
+  m_SortingLayerID: -36883835
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 93afb49724db0624fa033306dc6a17e9, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -186,7 +224,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MarkType: 0
   CustomComponentName: Sprite
-  CustomComment: 
+  CustomComment: "\u5361\u9762"
   mComponentName: SpriteRenderer
 --- !u!1 &8874965242219387783
 GameObject:
@@ -259,8 +297,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1905934521
-  m_SortingLayer: 3
+  m_SortingLayerID: -36883835
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0119113c3aee3314e9ec8b96ed0f7471, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -287,5 +325,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MarkType: 0
   CustomComponentName: Frame
-  CustomComment: 
+  CustomComment: "\u5361\u6846"
   mComponentName: SpriteRenderer

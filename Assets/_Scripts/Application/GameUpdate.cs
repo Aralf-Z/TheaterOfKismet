@@ -25,10 +25,12 @@ namespace TheaterOfKismet
             
             var model = this.GetModel<MainModel>();
 
-            model.dragDirection.Register(dir =>
+            model.dragDelta.Register(dir =>
             {
-                if(dir != 0)
-                    Debug.Log($"Dir -> {dir}");
+                if (dir != Vector2.zero)
+                {
+                    
+                }
             });
         }
 

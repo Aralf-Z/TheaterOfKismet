@@ -1,6 +1,7 @@
 using UnityEngine;
 using QFramework;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 using ZToolKit;
 
 namespace TheaterOfKismet.UI
@@ -12,40 +13,48 @@ namespace TheaterOfKismet.UI
 	{
 		private MainModel mMainModel;
 
-		private Vector3 mPreMousePos;
-		
+		private RectTransform mRectTransf;
+
 		private void Start()
 		{
 			mMainModel = this.GetModel<MainModel>();
+
+			mRectTransf = transform.GetComponent<RectTransform>();
+
+			mMainModel.dragRect.Value = mRectTransf.rect;
+
+			//transform.GetComponent<Image>().color = new Color(0, 0, 0, 0);
+		}
+
+		/// <summary>
+		/// 分辨率修改时
+		/// </summary>
+		public void OnResolutionChange()
+		{
+			mMainModel.dragRect.Value = mRectTransf.rect;
 		}
 		
 		public void OnBeginDrag(PointerEventData eventData)
 		{
-			if (eventData.IsMouseLeft())
+			if (eventData.IsPointerLegal())
 			{
-				mMainModel.dragDirection.Value = 0;
-				
-				mPreMousePos = Input.mousePosition;
+				mMainModel.dragDelta.Value = eventData.delta;
 			}
 		}
 
 		public void OnDrag(PointerEventData eventData)
 		{
-			if (eventData.IsMouseLeft())
+			if (eventData.IsPointerLegal())
 			{
-				var mousePos = Input.mousePosition;
-
-				mMainModel.dragDirection.Value = mousePos.x - mPreMousePos.x;
-
-				mPreMousePos = mousePos;
+				mMainModel.dragDelta.Value = eventData.delta;
 			}
 		}
 
 		public void OnEndDrag(PointerEventData eventData)
 		{
-			if (eventData.IsMouseLeft())
+			if (eventData.IsPointerLegal())
 			{
-				mMainModel.dragDirection.Value = 0;
+				mMainModel.dragDelta.Value = eventData.delta;
 			}
 		}
 	}

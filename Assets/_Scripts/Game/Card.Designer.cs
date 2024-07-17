@@ -1,4 +1,4 @@
-// Generate Id:4e00555a-5d49-4018-988d-8374334ada5f
+// Generate Id:0a42aac9-39b0-4a67-817c-27264ae0d032
 using UnityEngine;
 
 namespace TheaterOfKismet
@@ -6,9 +6,7 @@ namespace TheaterOfKismet
 	public partial class Card : QFramework.IController
 	{
 
-		public SpriteRenderer Frame;
-
-		public SpriteRenderer CardFace;
+		public CardView View;
 
 		QFramework.IArchitecture QFramework.IBelongToArchitecture.GetArchitecture()=>TheaterOfKismet.GameCore.Interface;
 	}

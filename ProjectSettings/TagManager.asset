@@ -44,9 +44,9 @@ TagManager:
   - name: BackGroud
     uniqueID: 3806412321
     locked: 0
-  - name: HidingCard
+  - name: Card
     uniqueID: 4258083461
     locked: 0
-  - name: ShowingCard
+  - name: VFx
     uniqueID: 2389032775
     locked: 0
