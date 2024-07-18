@@ -4,7 +4,6 @@
 */
 
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace ZToolKit
@@ -14,6 +13,7 @@ namespace ZToolKit
         public static void Log(string headStr, string messageStr, Color color = default)
         {
 #if UNITY_EDITOR
+            color = color == default ? Color.white : color;
             Debug.Log($"<color={color.ToHex()}>[{headStr}]: {messageStr}</color>");
 #endif
         }

@@ -1,24 +1,41 @@
 using UnityEngine;
 using QFramework;
+using ZToolKit;
 
 namespace TheaterOfKismet
 {
 	public partial class Card : ViewController
 	{
-		void Start()
+		public int moveSpeed = 10;
+		private float mAngle = 0;
+		
+		private MainModel mMainModel;
+		
+		private void Start()
 		{
-			var model = this.GetModel<MainModel>();
+			mMainModel = this.GetModel<MainModel>();
 
-			model.dragDelta.Register(delta =>
+			mMainModel.dragDelta.Register(delta =>
 			{
-				var screenPos = UnityEngine.Camera.main.WorldToScreenPoint(transform.position);
-				var wheelPosX = 
-					Mathf.Clamp(screenPos.x + delta.x, -model.wheelXMin, model.wheelXMax);
-				var wheelPosY = model.cardWheel.GetYFromX(wheelPosX);
+				var center = mMainModel.dragRect.Value.center;
+				var deltaAngle = delta.x * moveSpeed;
+				mAngle -= deltaAngle;
 
-				transform.position =
-					UnityEngine.Camera.main.ScreenToWorldPoint(new Vector3(wheelPosX, wheelPosY.yMax));
+				float x = center.x + mMainModel.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
+				float y = center.y + mMainModel.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
+
+				transform.position = new Vector3(x, y, 0f);
 			});
+		}
+
+		/// <summary>
+		/// 设置表现
+		/// </summary>
+		/// <param name="showRatio">0-1的参数</param>
+		public void SetShow(float showRatio)
+		{
+			showRatio = Mathf.Clamp01(showRatio);
+			View.SetShow(showRatio);
 		}
 	}
 }

@@ -4,6 +4,7 @@
 
 using QFramework;
 using UnityEngine;
+using ZToolKit;
 
 namespace TheaterOfKismet
 {
@@ -12,26 +13,17 @@ namespace TheaterOfKismet
       public BindableProperty<Vector2> dragDelta = new();
 
       public BindableProperty<Rect> dragRect = new();
-
-      public Ellipse cardWheel;
-
-      public float wheelXMin;
-      public float wheelXMax;
+      
+      public float ellipseA;
+      public float ellipseB;
       
       protected override void OnInit()
       {
-          dragRect.RegisterWithInitValue(rect =>
-          {
-              var resolution = UIKit.Config.Root.CanvasScaler.referenceResolution;
-              var xDelta = -resolution.x / 2;
-              var yDelta = -resolution.y / 2;
-              var ellipseA = dragRect.Value.width / 4;
-              var ellipseB = dragRect.Value.height / 4;
-
-              cardWheel = new Ellipse(ellipseA, ellipseB, xDelta, yDelta);
-              wheelXMin = -xDelta - ellipseA;
-              wheelXMax = -xDelta + ellipseB;
-          });
+         dragRect.Register(rect =>
+         {
+            ellipseA = rect.width / 2 * 5 / 6;
+            ellipseB = rect.height / 2 * 5 / 6;
+         });
       }
    }
 }

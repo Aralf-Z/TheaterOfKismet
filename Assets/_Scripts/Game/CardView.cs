@@ -14,15 +14,15 @@ namespace TheaterOfKismet
 		/// 设置显示状态
 		/// </summary>
 		/// <param name="show"></param>
-		public void SetShow(bool show)
+		public void SetShow(float showRatio)
 		{
 			//todo show可以改成一个线性值用来做大小颜色的渐变
 			
 			//todo 大小、颜色
 			
 			//显示层级
-			Frame.sortingOrder = show ? 10 : 0;
-			CardFace.sortingOrder = show ? 10 : 0;
+			Frame.sortingOrder = showRatio >= .9f ? 10 : 0;
+			CardFace.sortingOrder = showRatio >= .9f ? 10 : 0;
 		}
 	}
 }
