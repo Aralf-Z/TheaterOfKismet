@@ -15,12 +15,12 @@ namespace cfg.item
 {
 public partial class TbItem
 {
-    private readonly System.Collections.Generic.Dictionary<string, Item> _dataMap;
+    private readonly System.Collections.Generic.Dictionary<int, Item> _dataMap;
     private readonly System.Collections.Generic.List<Item> _dataList;
     
     public TbItem(JSONNode _buf)
     {
-        _dataMap = new System.Collections.Generic.Dictionary<string, Item>();
+        _dataMap = new System.Collections.Generic.Dictionary<int, Item>();
         _dataList = new System.Collections.Generic.List<Item>();
         
         foreach(JSONNode _ele in _buf.Children)
@@ -28,16 +28,16 @@ public partial class TbItem
             Item _v;
             { if(!_ele.IsObject) { throw new SerializationException(); }  _v = Item.DeserializeItem(_ele);  }
             _dataList.Add(_v);
-            _dataMap.Add(_v.CardTypeS, _v);
+            _dataMap.Add(_v.Id, _v);
         }
     }
 
-    public System.Collections.Generic.Dictionary<string, Item> DataMap => _dataMap;
+    public System.Collections.Generic.Dictionary<int, Item> DataMap => _dataMap;
     public System.Collections.Generic.List<Item> DataList => _dataList;
 
-    public Item GetOrDefault(string key) => _dataMap.TryGetValue(key, out var v) ? v : null;
-    public Item Get(string key) => _dataMap[key];
-    public Item this[string key] => _dataMap[key];
+    public Item GetOrDefault(int key) => _dataMap.TryGetValue(key, out var v) ? v : null;
+    public Item Get(int key) => _dataMap[key];
+    public Item this[int key] => _dataMap[key];
 
     public void ResolveRef(Tables tables)
     {

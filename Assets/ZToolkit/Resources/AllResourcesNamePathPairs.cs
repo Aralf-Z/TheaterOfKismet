@@ -17,6 +17,11 @@ namespace ZToolKit
 
         public void AddPair(string resName, string path)
         {
+            if (namePathDic.ContainsKey(resName))
+            {
+                namePathDic[resName] = path;
+                return;
+            }
             namePathDic.Add(resName,path);
         }
 

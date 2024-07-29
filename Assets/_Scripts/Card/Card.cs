@@ -23,7 +23,7 @@ public class Card : CardMove{
 	public Card(cfg.Item n_card_item){
 		card_type_s=n_card_item.CardTypeS;
 		card_description=n_card_item.DefaultCardDescription;
-		card_type=n_card_item.CardTypeId;
+		//card_type=n_card_item.CardTypeId;
 		card_name=n_card_item.CardDisplayName;
 		is_use_in_level=n_card_item.IsUseInLevel;
 		is_instant_effect=n_card_item.IsInstantEffect;

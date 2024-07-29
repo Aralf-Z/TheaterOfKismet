@@ -50,14 +50,14 @@ public partial class EffectManager
                     nfl = true;
                     b_instant_effect.Add(card_data[i].IsInstantEffect);
                     Debug.Log(card_data[i].IsInstantEffect);
-                    if (!card_data[i].IsInstantEffect && card_data[i].EffectImg != "")
-                    {
-                        effect_imgs.Add(null);
-                    }
-                    else
-                    {
-                        effect_imgs.Add(null);
-                    }
+                    // if (!card_data[i].IsInstantEffect && card_data[i].EffectImg != "")
+                    // {
+                    //     effect_imgs.Add(null);
+                    // }
+                    // else
+                    // {
+                    //     effect_imgs.Add(null);
+                    // }
                 }
             }
 

@@ -24,6 +24,10 @@ namespace TheaterOfKismet
 				float x = center.x + mMainModel.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
 				float y = center.y + mMainModel.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
 
+				var showRatio = (mMainModel.ellipseB - y + center.y) / (2 * mMainModel.ellipseB);
+				
+				SetShow(showRatio);
+				
 				transform.position = new Vector3(x, y, 0f);
 			});
 		}
@@ -34,7 +38,7 @@ namespace TheaterOfKismet
 		/// <param name="showRatio">0-1的参数</param>
 		public void SetShow(float showRatio)
 		{
-			showRatio = Mathf.Clamp01(showRatio);
+			showRatio = Mathf.Clamp01((showRatio + 4f) /5f);
 			View.SetShow(showRatio);
 		}
 	}
