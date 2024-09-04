@@ -11,7 +11,7 @@ TagManager:
   - 
   - Water
   - UI
-  - DragArea
+  - 
   - 
   - 
   - 
@@ -40,13 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: BackGroud
-    uniqueID: 3806412321
-    locked: 0
-  - name: Card
-    uniqueID: 4258083461
-    locked: 0
-  - name: VFx
-    uniqueID: 2389032775
     locked: 0

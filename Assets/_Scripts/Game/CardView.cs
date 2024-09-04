@@ -3,12 +3,11 @@ using QFramework;
 
 namespace TheaterOfKismet
 {
-	public partial class CardView : ViewController
+	public partial class CardView : MonoBehaviour
 	{
-		void Start()
-		{
-			// Code Here
-		}
+		public SpriteRenderer Frame;
+
+		public SpriteRenderer CardFace;
 		
 		/// <summary>
 		/// 设置显示状态

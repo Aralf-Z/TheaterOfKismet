@@ -1,10 +1,6 @@
 using System.IO;
 using Newtonsoft.Json;
 using UnityEditor;
-/*
-
-*/
-
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,11 +12,14 @@ namespace ZToolKit.Editor
         
         private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
         {
-            string filePath = Path.Combine(Application.streamingAssetsPath, "AllResPathData.json");
-            AllResourcesNamePathPairs allAssetDatas;
-            
-            if (File.Exists(filePath)) allAssetDatas = JsonConvert.DeserializeObject<AllResourcesNamePathPairs>(File.ReadAllText(filePath));
-            else allAssetDatas = new AllResourcesNamePathPairs();
+            string filePath = Path.Combine(Application.streamingAssetsPath, ResTool.ResConfig);
+            ResCatalog allAssetDatas;
+
+            if (File.Exists(filePath))
+            {
+                allAssetDatas = JsonConvert.DeserializeObject<ResCatalog>(File.ReadAllText(filePath));
+            }
+            else allAssetDatas = new ResCatalog();
 
             if (importedAssets.Length > 0)
                 ProcessNewResourcesAssetsImport(importedAssets, allAssetDatas);
@@ -34,12 +33,12 @@ namespace ZToolKit.Editor
             if (movedAssets.Length > 0)
                 ProcessNewResourcesAssetsImport(movedAssets, allAssetDatas);
             
-            //重新写入资源表
+            //todo 如果没有文件夹/文件，创建 重新写入资源表，记住删除路径会导致调用该方法创造路径，一个合理的解决方案？
             File.WriteAllText(filePath, JsonConvert.SerializeObject(allAssetDatas));
             AssetDatabase.Refresh();
         }
 
-        private static void ProcessNewResourcesAssetsImport(string[] importedAssets, AllResourcesNamePathPairs allAssetDatas)
+        private static void ProcessNewResourcesAssetsImport(string[] importedAssets, ResCatalog allAssetDatas)
         {
             foreach (var t in importedAssets)
             {
@@ -53,7 +52,7 @@ namespace ZToolKit.Editor
             }
         }
 
-        private static void ProcessResourcesAssetsDelete(string[] deletedAssets, AllResourcesNamePathPairs allAssetDatas)
+        private static void ProcessResourcesAssetsDelete(string[] deletedAssets, ResCatalog allAssetDatas)
         {
             foreach (var t in deletedAssets)
             {

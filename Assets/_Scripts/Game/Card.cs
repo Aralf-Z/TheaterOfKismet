@@ -4,8 +4,9 @@ using ZToolKit;
 
 namespace TheaterOfKismet
 {
-	public partial class Card : ViewController
+	public partial class Card : MonoBehaviour, IController
 	{
+		public CardView View;
 		public int moveSpeed = 10;
 		private float mAngle = 0;
 		
@@ -40,6 +41,11 @@ namespace TheaterOfKismet
 		{
 			showRatio = Mathf.Clamp01((showRatio + 4f) /5f);
 			View.SetShow(showRatio);
+		}
+
+		public IArchitecture GetArchitecture()
+		{
+			return GameCore.Interface;
 		}
 	}
 }

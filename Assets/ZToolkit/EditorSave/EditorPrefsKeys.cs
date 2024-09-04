@@ -16,7 +16,9 @@ namespace ZToolKit
         
         //lubanConfig
         public static string LubanPath => Application.productName + "LubanPath";
-        public static string LubanDataPath => Application.productName + "LubanDataPath";
+        public static string LubanConfigPath => Application.productName + "LubanConfigPath";
+        public static string LubanConfigUrl => Application.productName + "LubanConfigUrl";
+        public static string LubanOutputType => Application.productName + "LubanOutputType";
     }
 }
 

@@ -4,7 +4,7 @@ using QFramework;
 
 namespace TheaterOfKismet
 {
-	public partial class DragArea : ViewController
+	public partial class DragArea : MonoBehaviour, IController
 	{
 		private MainModel mMainModel;
 
@@ -12,6 +12,8 @@ namespace TheaterOfKismet
 		private LayerMask mLayerMask;
 		
 		private Vector2 mPrePosition;
+		
+		public UnityEngine.BoxCollider2D SelfBoxCollider2D;
 		
 		private void Start()
 		{
@@ -85,5 +87,9 @@ namespace TheaterOfKismet
 			Gizmos.DrawLine(leftDown, leftUp);
 		}
 #endif
+		public IArchitecture GetArchitecture()
+		{
+			return GameCore.Interface;
+		}
 	}
 }
