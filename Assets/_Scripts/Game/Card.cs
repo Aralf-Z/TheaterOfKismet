@@ -1,31 +1,37 @@
+using Game.Core;
 using UnityEngine;
 using QFramework;
-using ZToolKit;
 
-namespace TheaterOfKismet
+namespace Game
 {
-	public partial class Card : MonoBehaviour, IController
+	public class Card : MonoBehaviour, IController
 	{
-		public CardView View;
+		public CardView view;
 		public int moveSpeed = 10;
 		private float mAngle = 0;
-		
-		private MainModel mMainModel;
+
+		public void Init(float initialAngle)
+		{
+			mAngle = initialAngle;
+		}
 		
 		private void Start()
+		
 		{
-			mMainModel = this.GetModel<MainModel>();
+			var cardModel = this.GetModel<CardModel>();
 
-			mMainModel.dragDelta.Register(delta =>
+			cardModel.dragDelta.RegisterWithInitValue(delta =>
 			{
-				var center = mMainModel.dragRect.Value.center;
+				var move = this.GetModel<CardModel>();
+
+				var center = Vector2.zero;
 				var deltaAngle = delta.x * moveSpeed;
 				mAngle -= deltaAngle;
 
-				float x = center.x + mMainModel.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
-				float y = center.y + mMainModel.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
+				float x = center.x + move.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
+				float y = center.y + move.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
 
-				var showRatio = (mMainModel.ellipseB - y + center.y) / (2 * mMainModel.ellipseB);
+				var showRatio = (move.ellipseB - y + center.y) / (2 * move.ellipseB);
 				
 				SetShow(showRatio);
 				
@@ -40,7 +46,7 @@ namespace TheaterOfKismet
 		public void SetShow(float showRatio)
 		{
 			showRatio = Mathf.Clamp01((showRatio + 4f) /5f);
-			View.SetShow(showRatio);
+			view.SetShow(showRatio);
 		}
 
 		public IArchitecture GetArchitecture()

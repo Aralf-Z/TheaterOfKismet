@@ -1,35 +1,22 @@
 using System;
+using Game.Core;
 using UnityEngine;
 using QFramework;
 
-namespace TheaterOfKismet
+namespace Game
 {
-	public partial class DragArea : MonoBehaviour, IController
+	public class DragArea : MonoBehaviour
+		, IController
 	{
-		private MainModel mMainModel;
-
-		private UnityEngine.Camera mMainCamera;
+		private Camera mMainCamera;
 		private LayerMask mLayerMask;
 		
 		private Vector2 mPrePosition;
-		
-		public UnityEngine.BoxCollider2D SelfBoxCollider2D;
-		
+
 		private void Start()
 		{
-			mMainModel = this.GetModel<MainModel>();
-			mMainCamera = UnityEngine.Camera.main;
+			mMainCamera = Camera.main;
 			mLayerMask = LayerMask.GetMask("DragArea");
-			
-			// var center = (Vector2)transform.position + SelfBoxCollider2D.offset;
-			// var width = SelfBoxCollider2D.size.x;
-			// var height = SelfBoxCollider2D.size.y;
-			
-			var center = Vector2.zero;
-			var width = 12f;
-			var height = 6f;
-			
-			mMainModel.dragRect.Value = new Rect(center.x - width / 2, center.y - height / 2, width, height);
 		}
 
 		private void Update()
@@ -64,7 +51,8 @@ namespace TheaterOfKismet
 
 			if (hit.collider is not null)
 			{
-				mMainModel.dragDelta.Value = pos - mPrePosition;
+				var cardSystem = this.GetSystem<CardSystem>();
+				cardSystem.OnDrag(pos - mPrePosition);
 				mPrePosition = pos;
 			}
 		}
@@ -72,19 +60,7 @@ namespace TheaterOfKismet
 #if UNITY_EDITOR
 		private void OnDrawGizmos()
 		{
-			var center = (Vector2)transform.position + SelfBoxCollider2D.offset;
-			var size = SelfBoxCollider2D.size;
-			var leftUp = new Vector2(center.x - size.x / 2, center.y + size.y / 2);
-			var leftDown = new Vector2(center.x - size.x / 2, center.y - size.y / 2);
-			var rightUp = new Vector2(center.x + size.x / 2, center.y + size.y / 2);
-			var rightDown = new Vector2(center.x + size.x / 2, center.y - size.y / 2);
 			
-			Gizmos.color = Color.green;
-			
-			Gizmos.DrawLine(leftUp, rightUp);
-			Gizmos.DrawLine(rightUp, rightDown);
-			Gizmos.DrawLine(rightDown, leftDown);
-			Gizmos.DrawLine(leftDown, leftUp);
 		}
 #endif
 		public IArchitecture GetArchitecture()

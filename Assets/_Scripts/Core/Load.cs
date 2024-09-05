@@ -14,7 +14,7 @@ public class Load : MonoBehaviour
     {
         await ToolKit.Init();
 
-        SceneManager.LoadScene("_Scenes/MainMenu");
+        SceneManager.LoadScene("_Scenes/Game");
     }
 
     private void Update()

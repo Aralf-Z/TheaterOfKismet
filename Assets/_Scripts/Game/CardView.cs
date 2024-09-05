@@ -1,13 +1,12 @@
 using UnityEngine;
-using QFramework;
 
-namespace TheaterOfKismet
+namespace Game
 {
-	public partial class CardView : MonoBehaviour
+	public class CardView : MonoBehaviour
 	{
-		public SpriteRenderer Frame;
+		public SpriteRenderer frame;
 
-		public SpriteRenderer CardFace;
+		public SpriteRenderer cardFace;
 		
 		/// <summary>
 		/// 设置显示状态
@@ -19,8 +18,8 @@ namespace TheaterOfKismet
 			//todo 大小、颜色
 			transform.localScale = showRatio * Vector3.one;
 			//显示层级
-			Frame.sortingOrder = showRatio >= .9f ? 10 : 0;
-			CardFace.sortingOrder = showRatio >= .9f ? 10 : 0;
+			frame.sortingOrder = showRatio >= .9f ? 11 : 1;
+			cardFace.sortingOrder = showRatio >= .9f ? 10 : 0;
 		}
 	}
 }
