@@ -20,6 +20,7 @@ public partial class Tables
     public TbUICard TbUICard {get; }
     public TbGameCard TbGameCard {get; }
     public TbCardProbs TbCardProbs {get; }
+    public TbCardSValue TbCardSValue {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
@@ -29,6 +30,7 @@ public partial class Tables
         TbUICard = new TbUICard(loader("tbuicard"));
         TbGameCard = new TbGameCard(loader("tbgamecard"));
         TbCardProbs = new TbCardProbs(loader("tbcardprobs"));
+        TbCardSValue = new TbCardSValue(loader("tbcardsvalue"));
         ResolveRef();
     }
     
@@ -40,6 +42,7 @@ public partial class Tables
         TbUICard.ResolveRef(this);
         TbGameCard.ResolveRef(this);
         TbCardProbs.ResolveRef(this);
+        TbCardSValue.ResolveRef(this);
     }
 }
 

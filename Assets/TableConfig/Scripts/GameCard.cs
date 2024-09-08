@@ -21,7 +21,7 @@ public sealed partial class GameCard : Luban.BeanBase
         { if(!_buf["base_point"].IsNumber) { throw new SerializationException(); }  BasePoint = _buf["base_point"]; }
         { if(!_buf["card_des_key"].IsString) { throw new SerializationException(); }  CardDesKey = _buf["card_des_key"]; }
         { var __json0 = _buf["paras"]; if(!__json0.IsArray) { throw new SerializationException(); } int _n0 = __json0.Count; Paras = new int[_n0][]; int __index0=0; foreach(JSONNode __e0 in __json0.Children) { int[] __v0;  { var __json1 = __e0; if(!__json1.IsArray) { throw new SerializationException(); } int _n1 = __json1.Count; __v0 = new int[_n1]; int __index1=0; foreach(JSONNode __e1 in __json1.Children) { int __v1;  { if(!__e1.IsNumber) { throw new SerializationException(); }  __v1 = __e1; }  __v0[__index1++] = __v1; }   }  Paras[__index0++] = __v0; }   }
-        { if(!_buf["frame_res"].IsString) { throw new SerializationException(); }  FrameRes = _buf["frame_res"]; }
+        { if(!_buf["face_res"].IsString) { throw new SerializationException(); }  FaceRes = _buf["face_res"]; }
     }
 
     public static GameCard DeserializeGameCard(JSONNode _buf)
@@ -45,7 +45,7 @@ public sealed partial class GameCard : Luban.BeanBase
     /// <summary>
     /// 卡面资源名
     /// </summary>
-    public readonly string FrameRes;
+    public readonly string FaceRes;
    
     public const int __ID__ = -1705028030;
     public override int GetTypeId() => __ID__;
@@ -66,7 +66,7 @@ public sealed partial class GameCard : Luban.BeanBase
         + "basePoint:" + BasePoint + ","
         + "cardDesKey:" + CardDesKey + ","
         + "paras:" + Luban.StringUtil.CollectionToString(Paras) + ","
-        + "frameRes:" + FrameRes + ","
+        + "faceRes:" + FaceRes + ","
         + "}";
     }
 }

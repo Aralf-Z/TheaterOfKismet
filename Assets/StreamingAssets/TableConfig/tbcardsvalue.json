@@ -1,0 +1,16 @@
+[
+  {
+    "point_ratio": [
+      1,
+      2,
+      4,
+      8
+    ],
+    "frame_res": [
+      "Frame_0",
+      "Frame_1",
+      "Frame_2",
+      "Frame_3"
+    ]
+  }
+]

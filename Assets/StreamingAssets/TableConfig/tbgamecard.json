@@ -21,7 +21,7 @@
         5
       ]
     ],
-    "frame_res": "card_001"
+    "face_res": "card_001"
   },
   {
     "id": 2,
@@ -45,7 +45,7 @@
         4
       ]
     ],
-    "frame_res": "card_002"
+    "face_res": "card_002"
   },
   {
     "id": 3,
@@ -65,14 +65,14 @@
         13
       ]
     ],
-    "frame_res": "card_003"
+    "face_res": "card_003"
   },
   {
     "id": 4,
     "base_point": 4,
     "card_des_key": "card_des_4",
     "paras": [],
-    "frame_res": "card_004"
+    "face_res": "card_004"
   },
   {
     "id": 5,
@@ -92,7 +92,7 @@
         5
       ]
     ],
-    "frame_res": "card_005"
+    "face_res": "card_005"
   },
   {
     "id": 6,
@@ -116,7 +116,7 @@
         8
       ]
     ],
-    "frame_res": "card_006"
+    "face_res": "card_006"
   },
   {
     "id": 7,
@@ -136,7 +136,7 @@
         4
       ]
     ],
-    "frame_res": "card_007"
+    "face_res": "card_007"
   },
   {
     "id": 8,
@@ -156,7 +156,7 @@
         5
       ]
     ],
-    "frame_res": "card_008"
+    "face_res": "card_008"
   },
   {
     "id": 9,
@@ -180,7 +180,7 @@
         6
       ]
     ],
-    "frame_res": "card_009"
+    "face_res": "card_009"
   },
   {
     "id": 10,
@@ -200,6 +200,6 @@
         6
       ]
     ],
-    "frame_res": "card_010"
+    "face_res": "card_010"
   }
 ]

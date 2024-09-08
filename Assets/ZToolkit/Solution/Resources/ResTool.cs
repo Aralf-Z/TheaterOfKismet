@@ -36,7 +36,7 @@ namespace ZToolKit
                 return Resources.Load<T>(sNamePathDic[prefabName]);
             }
             
-            LogTool.EditorLogError($"ResLoad---Failed To Load {prefabName}");
+            LogTool.EditorLogError($@"ResLoad---Failed To Load ""{prefabName}""");
             return null;
         }
         

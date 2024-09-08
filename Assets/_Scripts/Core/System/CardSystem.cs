@@ -80,7 +80,7 @@ namespace Game.Core
       /// </returns>
       public (GameState gameState, (int cardId, int cardRarity)[] cardsPack) GetCards()
       {
-         var cardsPack = new (int,int)[] {(1,3),(2,2),(6,0),(9,5)};
+         var cardsPack = new (int,int)[] {(1,3),(2,2),(6,0),(9,1)};
 
          return (GameState.Playing, cardsPack);
       }

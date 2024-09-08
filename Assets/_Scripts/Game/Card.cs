@@ -30,6 +30,9 @@ namespace Game
 		{
 			var cardModel = this.GetModel<CardModel>();
 
+			view.cardFace.sprite = ResTool.Load<Sprite>(uiCard.FaceRes);
+			view.frame.sprite = ResTool.Load<Sprite>(uiCard.FrameRes);
+			
 			//angle是以y负半轴为0
 			mAngle = angle + kAngleOffset;
 			cardModel.dragDelta.RegisterWithInitValue(OnWheelMove);
@@ -44,7 +47,10 @@ namespace Game
 		public void Show(GameCard gameCard, int rarity, float angle)
 		{
 			var cardModel = this.GetModel<CardModel>();
-
+			
+			view.cardFace.sprite = ResTool.Load<Sprite>(gameCard.FaceRes);
+			view.frame.sprite = ResTool.Load<Sprite>(CfgTool.CardSValue.FrameRes[rarity]);
+			
 			//angle是以y负半轴为0
 			mAngle = angle + kAngleOffset;
 			cardModel.dragDelta.RegisterWithInitValue(OnWheelMove);
