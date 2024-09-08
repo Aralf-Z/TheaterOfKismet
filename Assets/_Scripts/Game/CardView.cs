@@ -13,10 +13,8 @@ namespace Game
 		/// </summary>
 		public void SetShow(float showRatio)
 		{
-			//todo show可以改成一个线性值用来做大小颜色的渐变
-			
-			//todo 大小、颜色
 			transform.localScale = showRatio * Vector3.one;
+			frame.color = cardFace.color = Color.white * showRatio;
 			//显示层级
 			frame.sortingOrder = showRatio >= .9f ? 11 : 1;
 			cardFace.sortingOrder = showRatio >= .9f ? 10 : 0;

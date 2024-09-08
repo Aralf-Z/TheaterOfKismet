@@ -1,0 +1,205 @@
+[
+  {
+    "id": 1,
+    "base_point": 2,
+    "card_des_key": "card_des_1",
+    "paras": [
+      [
+        3,
+        2
+      ],
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ]
+    ],
+    "frame_res": "card_001"
+  },
+  {
+    "id": 2,
+    "base_point": 2,
+    "card_des_key": "card_des_2",
+    "paras": [
+      [
+        5,
+        1
+      ],
+      [
+        5,
+        2
+      ],
+      [
+        5,
+        3
+      ],
+      [
+        5,
+        4
+      ]
+    ],
+    "frame_res": "card_002"
+  },
+  {
+    "id": 3,
+    "base_point": 2,
+    "card_des_key": "card_des_3",
+    "paras": [
+      [
+        10
+      ],
+      [
+        11
+      ],
+      [
+        12
+      ],
+      [
+        13
+      ]
+    ],
+    "frame_res": "card_003"
+  },
+  {
+    "id": 4,
+    "base_point": 4,
+    "card_des_key": "card_des_4",
+    "paras": [],
+    "frame_res": "card_004"
+  },
+  {
+    "id": 5,
+    "base_point": 4,
+    "card_des_key": "card_des_5",
+    "paras": [
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5
+      ]
+    ],
+    "frame_res": "card_005"
+  },
+  {
+    "id": 6,
+    "base_point": 10,
+    "card_des_key": "card_des_6",
+    "paras": [
+      [
+        1,
+        8
+      ],
+      [
+        1,
+        8
+      ],
+      [
+        2,
+        8
+      ],
+      [
+        3,
+        8
+      ]
+    ],
+    "frame_res": "card_006"
+  },
+  {
+    "id": 7,
+    "base_point": 4,
+    "card_des_key": "card_des_7",
+    "paras": [
+      [
+        1
+      ],
+      [
+        2
+      ],
+      [
+        3
+      ],
+      [
+        4
+      ]
+    ],
+    "frame_res": "card_007"
+  },
+  {
+    "id": 8,
+    "base_point": 5,
+    "card_des_key": "card_des_8",
+    "paras": [
+      [
+        5
+      ],
+      [
+        5
+      ],
+      [
+        5
+      ],
+      [
+        5
+      ]
+    ],
+    "frame_res": "card_008"
+  },
+  {
+    "id": 9,
+    "base_point": 5,
+    "card_des_key": "card_des_9",
+    "paras": [
+      [
+        3,
+        3
+      ],
+      [
+        3,
+        4
+      ],
+      [
+        3,
+        5
+      ],
+      [
+        3,
+        6
+      ]
+    ],
+    "frame_res": "card_009"
+  },
+  {
+    "id": 10,
+    "base_point": 10,
+    "card_des_key": "card_des_10",
+    "paras": [
+      [
+        3
+      ],
+      [
+        4
+      ],
+      [
+        5
+      ],
+      [
+        6
+      ]
+    ],
+    "frame_res": "card_010"
+  }
+]

@@ -27,6 +27,15 @@ public sealed partial class Audio : Luban.BeanBase
         { if(!_buf["pop_out"].IsString) { throw new SerializationException(); }  PopOut = _buf["pop_out"]; }
         { if(!_buf["pop_move"].IsString) { throw new SerializationException(); }  PopMove = _buf["pop_move"]; }
         { if(!_buf["pop_hide"].IsString) { throw new SerializationException(); }  PopHide = _buf["pop_hide"]; }
+        { if(!_buf["slide_up"].IsString) { throw new SerializationException(); }  SlideUp = _buf["slide_up"]; }
+        { if(!_buf["slide_down"].IsString) { throw new SerializationException(); }  SlideDown = _buf["slide_down"]; }
+        { if(!_buf["count_down"].IsString) { throw new SerializationException(); }  CountDown = _buf["count_down"]; }
+        { if(!_buf["laugh_1"].IsString) { throw new SerializationException(); }  Laugh1 = _buf["laugh_1"]; }
+        { if(!_buf["laugh_2"].IsString) { throw new SerializationException(); }  Laugh2 = _buf["laugh_2"]; }
+        { if(!_buf["laugh_3"].IsString) { throw new SerializationException(); }  Laugh3 = _buf["laugh_3"]; }
+        { if(!_buf["laugh_4"].IsString) { throw new SerializationException(); }  Laugh4 = _buf["laugh_4"]; }
+        { if(!_buf["click_button"].IsString) { throw new SerializationException(); }  ClickButton = _buf["click_button"]; }
+        { if(!_buf["buzzer"].IsString) { throw new SerializationException(); }  Buzzer = _buf["buzzer"]; }
     }
 
     public static Audio DeserializeAudio(JSONNode _buf)
@@ -74,12 +83,57 @@ public sealed partial class Audio : Luban.BeanBase
     /// 弹窗_隐藏
     /// </summary>
     public readonly string PopHide;
+    /// <summary>
+    /// 上划
+    /// </summary>
+    public readonly string SlideUp;
+    /// <summary>
+    /// 下划
+    /// </summary>
+    public readonly string SlideDown;
+    /// <summary>
+    /// 倒计时
+    /// </summary>
+    public readonly string CountDown;
+    /// <summary>
+    /// 笑
+    /// </summary>
+    public readonly string Laugh1;
+    /// <summary>
+    /// 欢呼
+    /// </summary>
+    public readonly string Laugh2;
+    /// <summary>
+    /// 大声欢呼
+    /// </summary>
+    public readonly string Laugh3;
+    /// <summary>
+    /// 满堂喝彩
+    /// </summary>
+    public readonly string Laugh4;
+    /// <summary>
+    /// 按钮
+    /// </summary>
+    public readonly string ClickButton;
+    /// <summary>
+    /// 蜂鸣器
+    /// </summary>
+    public readonly string Buzzer;
    
     public const int __ID__ = 63613878;
     public override int GetTypeId() => __ID__;
 
     public  void ResolveRef(Tables tables)
     {
+        
+        
+        
+        
+        
+        
+        
+        
+        
         
         
         
@@ -105,6 +159,15 @@ public sealed partial class Audio : Luban.BeanBase
         + "popOut:" + PopOut + ","
         + "popMove:" + PopMove + ","
         + "popHide:" + PopHide + ","
+        + "slideUp:" + SlideUp + ","
+        + "slideDown:" + SlideDown + ","
+        + "countDown:" + CountDown + ","
+        + "laugh1:" + Laugh1 + ","
+        + "laugh2:" + Laugh2 + ","
+        + "laugh3:" + Laugh3 + ","
+        + "laugh4:" + Laugh4 + ","
+        + "clickButton:" + ClickButton + ","
+        + "buzzer:" + Buzzer + ","
         + "}";
     }
 }

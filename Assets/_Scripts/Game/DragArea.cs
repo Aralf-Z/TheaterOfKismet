@@ -19,7 +19,7 @@ namespace Game
 			mLayerMask = LayerMask.GetMask("DragArea");
 		}
 
-		private void Update()
+		public void OnUpdate()
 		{
 			if (Input.GetMouseButtonDown(0))//鼠标按下时
 			{
@@ -52,7 +52,7 @@ namespace Game
 			if (hit.collider is not null)
 			{
 				var cardSystem = this.GetSystem<CardSystem>();
-				cardSystem.OnDrag(pos - mPrePosition);
+				cardSystem.OnDragCardWheel(pos - mPrePosition);
 				mPrePosition = pos;
 			}
 		}

@@ -26,7 +26,6 @@ namespace ZToolKit.Editor
             get
             {
                 var fileName = TableFile;
-
                 return   $@"
                 {{
                 ""groups"": [

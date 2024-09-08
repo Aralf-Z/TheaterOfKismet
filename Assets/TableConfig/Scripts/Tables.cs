@@ -15,16 +15,31 @@ namespace cfg
 public partial class Tables
 {
     public TbAudio TbAudio {get; }
+    public TbL10nUI TbL10nUI {get; }
+    public TbL10nGame TbL10nGame {get; }
+    public TbUICard TbUICard {get; }
+    public TbGameCard TbGameCard {get; }
+    public TbCardProbs TbCardProbs {get; }
 
     public Tables(System.Func<string, JSONNode> loader)
     {
         TbAudio = new TbAudio(loader("tbaudio"));
+        TbL10nUI = new TbL10nUI(loader("tbl10nui"));
+        TbL10nGame = new TbL10nGame(loader("tbl10ngame"));
+        TbUICard = new TbUICard(loader("tbuicard"));
+        TbGameCard = new TbGameCard(loader("tbgamecard"));
+        TbCardProbs = new TbCardProbs(loader("tbcardprobs"));
         ResolveRef();
     }
     
     private void ResolveRef()
     {
         TbAudio.ResolveRef(this);
+        TbL10nUI.ResolveRef(this);
+        TbL10nGame.ResolveRef(this);
+        TbUICard.ResolveRef(this);
+        TbGameCard.ResolveRef(this);
+        TbCardProbs.ResolveRef(this);
     }
 }
 

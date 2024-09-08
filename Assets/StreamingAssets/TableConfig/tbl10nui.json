@@ -1,0 +1,100 @@
+[
+  {
+    "id": 1,
+    "l10n_key": "start_up",
+    "cn": "开始游戏",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 2,
+    "l10n_key": "start_down",
+    "cn": "退出游戏",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 3,
+    "l10n_key": "setting_up",
+    "cn": "帮助",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 4,
+    "l10n_key": "setting_down",
+    "cn": "设置",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 5,
+    "l10n_key": "continue_up",
+    "cn": "回到主菜单",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 6,
+    "l10n_key": "continue_down",
+    "cn": "继续",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 7,
+    "l10n_key": "va_up",
+    "cn": "音频",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 8,
+    "l10n_key": "va_down",
+    "cn": "视频",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 9,
+    "l10n_key": "video_up",
+    "cn": "窗口化",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 10,
+    "l10n_key": "video_down",
+    "cn": "全屏",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 11,
+    "l10n_key": "audio_up",
+    "cn": "音效",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 12,
+    "l10n_key": "audio_down",
+    "cn": "音乐",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 13,
+    "l10n_key": "next_level_continue",
+    "cn": "继续",
+    "cn_traditional": "",
+    "en": ""
+  },
+  {
+    "id": 14,
+    "l10n_key": "next_level_back_to_main",
+    "cn": "返回主菜单",
+    "cn_traditional": "",
+    "en": ""
+  }
+]

@@ -15,7 +15,7 @@ namespace Game.Core
       public float ellipseA;
       public float ellipseB;
 
-      public int curCards;
+      public int playRound;
 
       protected override void OnInit()
       {

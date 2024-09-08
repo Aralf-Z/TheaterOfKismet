@@ -1,0 +1,51 @@
+[
+  {
+    "id": 101,
+    "des_up_key": "start_up",
+    "des_down_key": "start_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 102,
+    "des_up_key": "setting_up",
+    "des_down_key": "setting_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 103,
+    "des_up_key": "continue_up",
+    "des_down_key": "continue_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 104,
+    "des_up_key": "va_up",
+    "des_down_key": "va_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 105,
+    "des_up_key": "video_up",
+    "des_down_key": "video_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 106,
+    "des_up_key": "audio_up",
+    "des_down_key": "audio_down",
+    "face_res": "",
+    "frame_res": ""
+  },
+  {
+    "id": 107,
+    "des_up_key": "next_level_continue",
+    "des_down_key": "next_level_back_to_main",
+    "face_res": "",
+    "frame_res": ""
+  }
+]

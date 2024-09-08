@@ -4,8 +4,8 @@ set CONF_ROOT=.
 
 dotnet %LUBAN_DLL% ^
     -t all ^
-    -c cs-bin ^
-    -d bin  ^
+    -c cs-simple-json ^
+    -d json  ^
     --conf %CONF_ROOT%\luban.conf ^
     -x outputDataDir=%WORKSPACE%\Assets\StreamingAssets\TableConfig^
     -x outputCodeDir=%WORKSPACE%\Assets\TableConfig\Scripts
