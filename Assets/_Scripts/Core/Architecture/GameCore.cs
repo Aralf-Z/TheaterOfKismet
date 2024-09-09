@@ -11,8 +11,8 @@ namespace Game.Core
     {
         protected override void Init()
         {
-            RegisterSystem(new CardSystem());
             RegisterModel(new CardModel());
+            RegisterSystem(new CardSystem());
         }
     }
 } 
