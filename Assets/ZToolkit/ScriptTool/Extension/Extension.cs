@@ -11,7 +11,7 @@ namespace ZToolKit
     public static class Extension
     {
         /// <summary>
-        /// 判断指针合法-左键或者单指
+        /// UI判断指针合法-左键或者单指
         /// </summary>
         /// <param name="eventData"></param>
         /// <returns></returns>

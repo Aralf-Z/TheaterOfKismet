@@ -32,11 +32,11 @@ namespace Game.Core
 
       protected override void OnInit()
       {
-          cardPlayPhaseMap.Add(CardWheelPhase.DragWheel, new DragWheelPhase(this));
-          cardPlayPhaseMap.Add(CardWheelPhase.DragCard, new DragCardPhase(this));
-          cardPlayPhaseMap.Add(CardWheelPhase.Reset, new ResetPhase(this));
-          cardPlayPhaseMap.Add(CardWheelPhase.Idle, new IdlePhase(this));
-          cardPlayPhaseMap.Add(CardWheelPhase.CardNumChange, new CardNumChangePhase(this));
+          cardPlayPhaseMap.Add(CardWheelPhase.DragWheel, new DragWheelPhase());
+          cardPlayPhaseMap.Add(CardWheelPhase.DragCard, new DragCardPhase());
+          cardPlayPhaseMap.Add(CardWheelPhase.Reset, new ResetPhase());
+          cardPlayPhaseMap.Add(CardWheelPhase.Idle, new IdlePhase());
+          cardPlayPhaseMap.Add(CardWheelPhase.CardNumChange, new CardNumChangePhase());
       }
 
       public void GameEntry()
@@ -57,14 +57,14 @@ namespace Game.Core
       
       public void ChangeWheelPhase(CardWheelPhase cardWheelPhase)
       {
-         mCurWheelPhase?.OnExit();
+         mCurWheelPhase?.OnExit(this);
          mCurWheelPhase = cardPlayPhaseMap[cardWheelPhase];
-         mCurWheelPhase.OnEnter();
+         mCurWheelPhase.OnEnter(this);
       }
       
       public void OnUpdate(float dt)
       {
-         mCurWheelPhase.OnUpdate(dt);
+         mCurWheelPhase.OnUpdate(this, dt);
       }
       
       public void OnDragCardWheel(Vector2 dragDelta)

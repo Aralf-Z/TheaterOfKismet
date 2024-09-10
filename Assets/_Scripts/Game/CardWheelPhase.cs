@@ -33,95 +33,66 @@ namespace Game.Core
 
     public class DragWheelPhase: WheelPhaseBase
     {
-        public DragWheelPhase(CardSystem cardSystem) : base(cardSystem)
-        {
-        }
-        
         private Camera mMainCamera;
-        private LayerMask mDragLayerMask;
-        private LayerMask mCardLayerMask;
-		
+        private LayerMask mWheelLayerMask;
         private Vector2 mPrePosition;
 
-        public override void OnEnter()
+        public override void OnEnter(CardSystem cardSystem)
         {
             mMainCamera = Camera.main;
-            mDragLayerMask = LayerMask.GetMask("DragArea");
-            mCardLayerMask = LayerMask.GetMask("Card");
-            mPrePosition = Vector2.zero;
-        }
+            mWheelLayerMask = LayerMask.GetMask("DragArea");
 
-        public override void OnUpdate(float dt)
-        {
-            if (Input.GetMouseButtonDown(0))//鼠标按下时
+            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
             {
-                mPrePosition = mMainCamera.ScreenToWorldPoint(Input.mousePosition);
-            }
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)//触摸屏按下时
-            {
-                mPrePosition = Input.GetTouch(0).position;
-            }
-            else if (Input.GetMouseButton(0))//鼠标按住时
-            {
-                var pos = mMainCamera.ScreenToWorldPoint(Input.mousePosition);
-                SetDelta(pos);
-            }
-            else if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved)//触摸屏按住时
-            {
-                var pos = Input.GetTouch(0).position;
-                SetDelta(pos);
-            }
-            else if (Input.GetMouseButtonUp(0) || Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)//鼠标抬起时 || 触摸屏抬起时
-            {
-                mPrePosition = Vector2.zero;
-            }
-        }
-
-        public override void OnExit()
-        {
-            
-        }
-        
-        private void SetDelta(Vector2 pos)
-        {
-            var hit = Physics2D.Raycast(pos, Vector2.zero, 2f, mDragLayerMask);
-
-            if (hit.collider is not null)
-            {
-                var delta = pos - mPrePosition;
-                cardSystem.OnDragCardWheel(delta);
                 mPrePosition = pos;
+            }
+            else
+            {
+                //todo
+                Debug.Log("Error Enter DragWheel");
+            }
+        }
 
-                if (Mathf.Abs(delta.y) > Mathf.Abs(delta.x))
+        public override void OnUpdate(CardSystem cardSystem, float dt)
+        {
+            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            {
+                if (GameInput_2D.IsOnLayer(pos, mWheelLayerMask))
                 {
-                    var cardHit = Physics2D.Raycast(pos, Vector2.zero, 2f, mCardLayerMask);
-
-                    if (cardHit.collider is not null)
-                    {
-                        cardSystem.ChangeWheelPhase(CardWheelPhase.DragCard);
-                    }
+                    var delta = mPrePosition - pos;
+                    mPrePosition = pos;
+                    cardSystem.OnDragCardWheel(delta);
+                }
+                else
+                {
+                    cardSystem.ChangeWheelPhase(CardWheelPhase.Idle);
                 }
             }
+            else
+            {
+                cardSystem.ChangeWheelPhase(CardWheelPhase.Idle);
+            }
+        }
+
+        public override void OnExit(CardSystem cardSystem)
+        {
+            
         }
     }
 
     public class DragCardPhase : WheelPhaseBase
     {
-        public DragCardPhase(CardSystem cardSystem) : base(cardSystem)
-        {
-        }
-
-        public override void OnEnter()
+        public override void OnEnter(CardSystem cardSystem)
         {
             Debug.Log("DragCard");
         }
 
-        public override void OnUpdate(float dt)
+        public override void OnUpdate(CardSystem cardSystem, float dt)
         {
             
         }
 
-        public override void OnExit()
+        public override void OnExit(CardSystem cardSystem)
         {
             
         }
@@ -129,21 +100,34 @@ namespace Game.Core
     
     public class IdlePhase : WheelPhaseBase
     {
-        public IdlePhase(CardSystem cardSystem) : base(cardSystem)
+        private Camera mMainCamera;
+        private LayerMask mDragLayerMask;
+        private LayerMask mCardLayerMask;
+        
+        public override void OnEnter(CardSystem cardSystem)
         {
+            mMainCamera = Camera.main;
+            mDragLayerMask = LayerMask.GetMask("DragArea");
+            mCardLayerMask = LayerMask.GetMask("Card");
         }
 
-        public override void OnEnter()
+        public override void OnUpdate(CardSystem cardSystem, float dt)
         {
-            
+            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            {
+                if (GameInput_2D.IsOnLayer(pos, mCardLayerMask))
+                {
+                    //todo 拖拽到卡牌时,判定成功就return
+                }
+                
+                if(GameInput_2D.IsOnLayer(pos, mDragLayerMask))
+                {
+                    cardSystem.ChangeWheelPhase(CardWheelPhase.DragWheel);
+                }
+            }
         }
 
-        public override void OnUpdate(float dt)
-        {
-            
-        }
-
-        public override void OnExit()
+        public override void OnExit(CardSystem cardSystem)
         {
             
         }
@@ -151,23 +135,18 @@ namespace Game.Core
 
     public class ResetPhase : WheelPhaseBase
     {
-        public ResetPhase(CardSystem cardSystem) : base(cardSystem)
-        {
-            
-        }
-
-        public override void OnEnter()
+        public override void OnEnter(CardSystem cardSystem)
         {
             cardSystem.cardsMgr.ResetCards();
             cardSystem.ChangeWheelPhase(CardWheelPhase.DragWheel);
         }
 
-        public override void OnUpdate(float dt)
+        public override void OnUpdate(CardSystem cardSystem, float dt)
         {
             
         }
 
-        public override void OnExit()
+        public override void OnExit(CardSystem cardSystem)
         {
             
         }
@@ -175,21 +154,18 @@ namespace Game.Core
     
     public class CardNumChangePhase : WheelPhaseBase
     {
-        public CardNumChangePhase(CardSystem cardSystem) : base(cardSystem)
-        {
-        }
-
-        public override void OnEnter()
+        
+        public override void OnEnter(CardSystem cardSystem)
         {
             
         }
 
-        public override void OnUpdate(float dt)
+        public override void OnUpdate(CardSystem cardSystem, float dt)
         {
             
         }
 
-        public override void OnExit()
+        public override void OnExit(CardSystem cardSystem)
         {
             
         }
@@ -197,17 +173,10 @@ namespace Game.Core
     
     public abstract class WheelPhaseBase
     {
-        protected CardSystem cardSystem;
+        public abstract void OnEnter(CardSystem cardSystem);
 
-        protected WheelPhaseBase(CardSystem cardSystem)
-        {
-            this.cardSystem = cardSystem;
-        }
+        public abstract void OnUpdate(CardSystem cardSystem, float dt);
 
-        public abstract void OnEnter();
-
-        public abstract void OnUpdate(float dt);
-
-        public abstract void OnExit();
+        public abstract void OnExit(CardSystem cardSystem);
     }
 } 
