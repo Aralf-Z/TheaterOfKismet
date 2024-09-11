@@ -31,8 +31,8 @@ namespace ZToolKit
             }
         }
         
-        public static Audio Audio => Tables.TbAudio.DataList[0];
-        public static CardSValue CardSValue => Tables.TbCardSValue.DataList[0];
+        public static Audio Audio => Tables.TbAudio.Data;
+        public static CardSValue CardSValue => Tables.TbCardSValue.Data;
         
         private static Tables sTables;
 

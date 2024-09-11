@@ -15,30 +15,31 @@ namespace cfg
 {
 public partial class TbCardSValue
 {
-    private readonly System.Collections.Generic.List<CardSValue> _dataList;
 
+     private readonly CardSValue _data;
+
+     public CardSValue Data => _data;
 
     public TbCardSValue(JSONNode _buf)
     {
-        _dataList = new System.Collections.Generic.List<CardSValue>();
-        
-        foreach(JSONNode _ele in _buf.Children)
-        {
-            CardSValue _v;
-            { if(!_ele.IsObject) { throw new SerializationException(); }  _v = CardSValue.DeserializeCardSValue(_ele);  }
-            _dataList.Add(_v);
-        }
+        int n = _buf.Count;
+        if (n != 1) throw new SerializationException("table mode=one, but size != 1");
+        { if(!_buf[0].IsObject) { throw new SerializationException(); }  _data = CardSValue.DeserializeCardSValue(_buf[0]);  }
     }
 
-    public System.Collections.Generic.List<CardSValue> DataList => _dataList;
 
+    /// <summary>
+    /// 稀有度分数系数
+    /// </summary>
+     public int[] PointRatio => _data.PointRatio;
+    /// <summary>
+    /// 稀有度底框资源
+    /// </summary>
+     public string[] FrameRes => _data.FrameRes;
     
     public void ResolveRef(Tables tables)
     {
-        foreach(var _v in _dataList)
-        {
-            _v.ResolveRef(tables);
-        }
+        _data.ResolveRef(tables);
     }
 }
 

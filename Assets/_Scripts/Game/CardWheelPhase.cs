@@ -1,5 +1,6 @@
 using QFramework;
 using UnityEngine;
+using Vector3 = System.Numerics.Vector3;
 
 namespace Game.Core
 {
@@ -33,23 +34,19 @@ namespace Game.Core
 
     public class DragWheelPhase: WheelPhaseBase
     {
-        private Camera mMainCamera;
-        private LayerMask mWheelLayerMask;
+        private Camera mMainCamera = Camera.main;
+        private LayerMask mWheelLayerMask = LayerMask.GetMask("DragArea");
         private Vector2 mPrePosition;
 
         public override void OnEnter(CardSystem cardSystem)
         {
-            mMainCamera = Camera.main;
-            mWheelLayerMask = LayerMask.GetMask("DragArea");
-
             if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
             {
                 mPrePosition = pos;
             }
             else
             {
-                //todo
-                Debug.Log("Error Enter DragWheel");
+                cardSystem.ChangeWheelPhase(CardWheelPhase.Idle);
             }
         }
 
@@ -82,14 +79,38 @@ namespace Game.Core
 
     public class DragCardPhase : WheelPhaseBase
     {
+        private Camera mMainCamera = Camera.main;
+        private LayerMask mCardLayerMask = LayerMask.GetMask("Card");
+        private Vector2 mPrePos;
+        
         public override void OnEnter(CardSystem cardSystem)
         {
-            Debug.Log("DragCard");
+            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            {
+                if (GameInput_2D.IsOnLayer(pos, mCardLayerMask))
+                {
+                    mPrePos = pos;
+                }
+            }
+            else
+            {
+                cardSystem.ChangeWheelPhase(CardWheelPhase.Idle);
+            }
         }
 
         public override void OnUpdate(CardSystem cardSystem, float dt)
         {
-            
+            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            {
+                if (GameInput_2D.IsOnLayer(pos, mCardLayerMask))
+                {
+                    mPrePos = pos;
+                }
+            }
+            else
+            {
+                
+            }
         }
 
         public override void OnExit(CardSystem cardSystem)
@@ -100,30 +121,49 @@ namespace Game.Core
     
     public class IdlePhase : WheelPhaseBase
     {
-        private Camera mMainCamera;
-        private LayerMask mDragLayerMask;
-        private LayerMask mCardLayerMask;
+        private Camera mMainCamera = Camera.main;
+        private LayerMask mDragLayerMask = LayerMask.GetMask("DragArea");
+        private LayerMask mCardLayerMask = LayerMask.GetMask("Card");
+        private Vector2 mPrePos;
+        private bool mOnDrag;
         
         public override void OnEnter(CardSystem cardSystem)
         {
-            mMainCamera = Camera.main;
-            mDragLayerMask = LayerMask.GetMask("DragArea");
-            mCardLayerMask = LayerMask.GetMask("Card");
+            mOnDrag = false;
         }
 
         public override void OnUpdate(CardSystem cardSystem, float dt)
         {
             if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
             {
-                if (GameInput_2D.IsOnLayer(pos, mCardLayerMask))
+                if (mOnDrag)
                 {
-                    //todo 拖拽到卡牌时,判定成功就return
+                    var delta = mPrePos - pos;
+                    
+                    if (GameInput_2D.IsOnLayer(pos, mCardLayerMask) && delta.x * 1.73f > delta.y)
+                    {
+                        cardSystem.ChangeWheelPhase(CardWheelPhase.DragCard);
+                        return;
+                    }
+                
+                    if(GameInput_2D.IsOnLayer(pos, mDragLayerMask))
+                    {
+                        cardSystem.ChangeWheelPhase(CardWheelPhase.DragWheel);
+                        return;
+                    }
+
+                    mPrePos = pos;
+                }
+                else
+                {
+                    mOnDrag = true;
+                    mPrePos = pos;
                 }
                 
-                if(GameInput_2D.IsOnLayer(pos, mDragLayerMask))
-                {
-                    cardSystem.ChangeWheelPhase(CardWheelPhase.DragWheel);
-                }
+            }
+            else
+            {
+                mOnDrag = false;
             }
         }
 

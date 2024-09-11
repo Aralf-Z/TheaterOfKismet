@@ -1,69 +1,59 @@
 [
   {
-    "id": 1,
     "l10n_key": "card_des_1",
     "cn": "如果本回合使用了{0}张相同的牌，本回合最终分数*{1}",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 2,
     "l10n_key": "card_des_2",
     "cn": "提升下回合抽到的前{0}张卡的稀有度{1}次",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 3,
     "l10n_key": "card_des_3",
     "cn": "{0}秒内展示另外一种卡面效果",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 4,
     "l10n_key": "card_des_4",
     "cn": "获得一项随机！@#￥&^^##$",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 5,
     "l10n_key": "card_des_5",
     "cn": "下一张记分牌*{0}",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 6,
     "l10n_key": "card_des_6",
     "cn": "获得你使用的下一张的{0}复制，每回合最多生效{1}次（剩余{2}次）",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 7,
     "l10n_key": "card_des_7",
     "cn": "下回合额外抽取{0}张牌",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 8,
     "l10n_key": "card_des_8",
     "cn": "让观众们为你欢呼{0}秒",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 9,
     "l10n_key": "card_des_9",
     "cn": "{0}秒内打出的记分牌额外记{1}分",
     "cn_traditional": "",
     "en": ""
   },
   {
-    "id": 10,
     "l10n_key": "card_des_10",
     "cn": "本回合使用的最后一张卡牌分数*{0}",
     "cn_traditional": "",

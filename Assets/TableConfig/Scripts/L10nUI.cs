@@ -17,7 +17,6 @@ public sealed partial class L10nUI : Luban.BeanBase
 {
     public L10nUI(JSONNode _buf) 
     {
-        { if(!_buf["id"].IsNumber) { throw new SerializationException(); }  Id = _buf["id"]; }
         { if(!_buf["l10n_key"].IsString) { throw new SerializationException(); }  L10nKey = _buf["l10n_key"]; }
         { if(!_buf["cn"].IsString) { throw new SerializationException(); }  Cn = _buf["cn"]; }
         { if(!_buf["cn_traditional"].IsString) { throw new SerializationException(); }  CnTraditional = _buf["cn_traditional"]; }
@@ -29,10 +28,6 @@ public sealed partial class L10nUI : Luban.BeanBase
         return new L10nUI(_buf);
     }
 
-    /// <summary>
-    /// 序列号
-    /// </summary>
-    public readonly int Id;
     /// <summary>
     /// 语言key
     /// </summary>
@@ -59,13 +54,11 @@ public sealed partial class L10nUI : Luban.BeanBase
         
         
         
-        
     }
 
     public override string ToString()
     {
         return "{ "
-        + "id:" + Id + ","
         + "l10nKey:" + L10nKey + ","
         + "cn:" + Cn + ","
         + "cnTraditional:" + CnTraditional + ","
