@@ -3,7 +3,7 @@
 Shader "Spine/Outline/Skeleton Fill" {
 	Properties {
 		_FillColor ("FillColor", Color) = (1,1,1,1)
-		_FillPhase ("FillPhase", Range(0, 1)) = 0
+		_FillState ("FillState", Range(0, 1)) = 0
 		[NoScaleOffset] _MainTex ("MainTex", 2D) = "white" {}
 		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0

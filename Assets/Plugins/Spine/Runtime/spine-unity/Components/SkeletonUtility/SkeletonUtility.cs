@@ -366,7 +366,7 @@ namespace Spine.Unity {
 				for (int i = 0, n = boneComponents.Count; i < n; i++) {
 					SkeletonUtilityBone b = boneComponents[i];
 					if (b.bone == null) {
-						b.DoUpdate(SkeletonUtilityBone.UpdatePhase.Local);
+						b.DoUpdate(SkeletonUtilityBone.UpdateState.Local);
 						if (b.bone == null) continue;
 					}
 					hasOverrideBones |= (b.mode == SkeletonUtilityBone.Mode.Override);
@@ -391,27 +391,27 @@ namespace Spine.Unity {
 			for (int i = 0, n = boneComponents.Count; i < n; i++)
 				boneComponents[i].transformLerpComplete = false;
 
-			UpdateAllBones(SkeletonUtilityBone.UpdatePhase.Local);
+			UpdateAllBones(SkeletonUtilityBone.UpdateState.Local);
 		}
 
 		void UpdateWorld (ISkeletonAnimation anim) {
-			UpdateAllBones(SkeletonUtilityBone.UpdatePhase.World);
+			UpdateAllBones(SkeletonUtilityBone.UpdateState.World);
 			for (int i = 0, n = constraintComponents.Count; i < n; i++)
 				constraintComponents[i].DoUpdate();
 		}
 
 		void UpdateComplete (ISkeletonAnimation anim) {
-			UpdateAllBones(SkeletonUtilityBone.UpdatePhase.Complete);
+			UpdateAllBones(SkeletonUtilityBone.UpdateState.Complete);
 		}
 
-		void UpdateAllBones (SkeletonUtilityBone.UpdatePhase phase) {
+		void UpdateAllBones (SkeletonUtilityBone.UpdateState State) {
 			if (boneRoot == null)
 				CollectBones();
 
 			List<SkeletonUtilityBone> boneComponents = this.boneComponents;
 			if (boneComponents == null) return;
 			for (int i = 0, n = boneComponents.Count; i < n; i++)
-				boneComponents[i].DoUpdate(phase);
+				boneComponents[i].DoUpdate(State);
 		}
 
 		public Transform GetBoneRoot () {

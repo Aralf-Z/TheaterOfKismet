@@ -88,7 +88,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
             int initialFrame;
             float elapsed;
-            bool dueTimePhase;
+            bool dueTimeState;
             bool completed;
             bool disposed;
 
@@ -104,7 +104,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
 
                 this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
-                this.dueTimePhase = true;
+                this.dueTimeState = true;
                 this.updateTiming = updateTiming;
                 this.ignoreTimeScale = ignoreTimeScale;
                 this.cancellationToken = cancellationToken;
@@ -164,7 +164,7 @@ namespace Cysharp.Threading.Tasks.Linq
                     return false;
                 }                
 
-                if (dueTimePhase)
+                if (dueTimeState)
                 {
                     if (elapsed == 0)
                     {
@@ -179,7 +179,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                     if (elapsed >= dueTime)
                     {
-                        dueTimePhase = false;
+                        dueTimeState = false;
                         completionSource.TrySetResult(true);
                     }
                 }
@@ -234,7 +234,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
             int initialFrame;
             int currentFrame;
-            bool dueTimePhase;
+            bool dueTimeState;
             bool completed;
             bool disposed;
 
@@ -247,7 +247,7 @@ namespace Cysharp.Threading.Tasks.Linq
                 }
 
                 this.initialFrame = PlayerLoopHelper.IsMainThread ? Time.frameCount : -1;
-                this.dueTimePhase = true;
+                this.dueTimeState = true;
                 this.dueTimeFrameCount = dueTimeFrameCount;
                 this.periodFrameCount = periodFrameCount;
                 this.cancellationToken = cancellationToken;
@@ -306,13 +306,13 @@ namespace Cysharp.Threading.Tasks.Linq
                     return false;
                 }
 
-                if (dueTimePhase)
+                if (dueTimeState)
                 {
                     if (currentFrame == 0)
                     {
                         if (dueTimeFrameCount == 0)
                         {
-                            dueTimePhase = false;
+                            dueTimeState = false;
                             completionSource.TrySetResult(true);
                             return true;
                         }
@@ -326,7 +326,7 @@ namespace Cysharp.Threading.Tasks.Linq
 
                     if (++currentFrame >= dueTimeFrameCount)
                     {
-                        dueTimePhase = false;
+                        dueTimeState = false;
                         completionSource.TrySetResult(true);
                     }
                     else

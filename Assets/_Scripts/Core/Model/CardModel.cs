@@ -17,6 +17,8 @@ namespace Game.Core
 
       public int playRound;
 
+      public int curCard;
+      
       protected override void OnInit()
       {
          ellipseA = 5;

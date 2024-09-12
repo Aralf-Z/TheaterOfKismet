@@ -3,7 +3,7 @@ Shader "Spine/SkeletonGraphic Fill"
 	Properties
 	{
 		_FillColor("FillColor", Color) = (1,1,1,1)
-		_FillPhase("FillPhase", Range(0, 1)) = 0
+		_FillState("FillState", Range(0, 1)) = 0
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
 		[Toggle(_CANVAS_GROUP_COMPATIBLE)] _CanvasGroupCompatible("CanvasGroup Compatible", Int) = 1

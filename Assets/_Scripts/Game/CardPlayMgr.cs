@@ -16,7 +16,6 @@ namespace Game
         private void Start()
         {
             mCardSystem = this.GetSystem<CardSystem>();
-            
         }
 
         private void Update()

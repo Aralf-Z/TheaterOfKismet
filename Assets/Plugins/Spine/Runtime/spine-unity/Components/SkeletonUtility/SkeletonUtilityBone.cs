@@ -48,7 +48,7 @@ namespace Spine.Unity {
 			Override
 		}
 
-		public enum UpdatePhase {
+		public enum UpdateState {
 			Local,
 			World,
 			Complete
@@ -82,7 +82,7 @@ namespace Spine.Unity {
 			skeletonTransform = hierarchy.transform;
 			hierarchy.OnReset -= HandleOnReset;
 			hierarchy.OnReset += HandleOnReset;
-			DoUpdate(UpdatePhase.Local);
+			DoUpdate(UpdateState.Local);
 		}
 
 		void OnEnable () {
@@ -104,7 +104,7 @@ namespace Spine.Unity {
 			}
 		}
 
-		public void DoUpdate (UpdatePhase phase) {
+		public void DoUpdate (UpdateState State) {
 			if (!valid) {
 				Reset();
 				return;
@@ -127,8 +127,8 @@ namespace Spine.Unity {
 			Transform thisTransform = cachedTransform;
 			float skeletonFlipRotation = Mathf.Sign(skeleton.ScaleX * skeleton.ScaleY);
 			if (mode == Mode.Follow) {
-				switch (phase) {
-				case UpdatePhase.Local:
+				switch (State) {
+				case UpdateState.Local:
 					if (position)
 						thisTransform.localPosition = new Vector3(bone.X * positionScale, bone.Y * positionScale,
 							zPosition ? 0 : thisTransform.localPosition.z);
@@ -147,8 +147,8 @@ namespace Spine.Unity {
 						incompatibleTransformMode = BoneTransformModeIncompatible(bone);
 					}
 					break;
-				case UpdatePhase.World:
-				case UpdatePhase.Complete:
+				case UpdateState.World:
+				case UpdateState.Complete:
 					if (position)
 						thisTransform.localPosition = new Vector3(bone.AX * positionScale, bone.AY * positionScale,
 							zPosition ? 0 : thisTransform.localPosition.z);

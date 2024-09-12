@@ -667,7 +667,7 @@ namespace Spine.Unity.Editor {
 					Shader defaultShader = GetDefaultShader();
 					material = defaultShader != null ? new Material(defaultShader) : null;
 					if (material) {
-						ApplyPMAOrStraightAlphaSettings(material, SpineEditorUtilities.Preferences.textureSettingsReference);
+						ApplyPMAOrStraightAlStatettings(material, SpineEditorUtilities.Preferences.textureSettingsReference);
 						if (texture != null)
 							material.mainTexture = texture;
 						AssetDatabase.CreateAsset(material, materialPath);
@@ -863,7 +863,7 @@ namespace Spine.Unity.Editor {
 				if (material == null) {
 					Shader defaultShader = GetDefaultShader();
 					material = defaultShader != null ? new Material(defaultShader) : null;
-					ApplyPMAOrStraightAlphaSettings(material, SpineEditorUtilities.Preferences.textureSettingsReference);
+					ApplyPMAOrStraightAlStatettings(material, SpineEditorUtilities.Preferences.textureSettingsReference);
 					AssetDatabase.CreateAsset(material, materialPath);
 				} else {
 					vestigialMaterials.Remove(material);
@@ -978,7 +978,7 @@ namespace Spine.Unity.Editor {
 		}
 #endif
 
-		static void ApplyPMAOrStraightAlphaSettings (Material material, string referenceTextureSettings) {
+		static void ApplyPMAOrStraightAlStatettings (Material material, string referenceTextureSettings) {
 			bool isUsingPMAWorkflow = string.IsNullOrEmpty(referenceTextureSettings) ||
 				(!referenceTextureSettings.ToLower().Contains("straight") && referenceTextureSettings.ToLower().Contains("pma"));
 

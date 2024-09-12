@@ -20,30 +20,27 @@ namespace Game.Core
    //todo 实质上这个系统有点像游戏管理器了，他即管理游玩状态，又管理游戏流程，需要拆解一下
    public class CardSystem : AbstractSystem
    {
-      private GameState mCurState;// { get; private set; }
-      private WheelPhaseBase mCurWheelPhase;// { get; private set; }
+      private GameState mCurGameState;// { get; private set; }
+      private WheelStateBase mCurWheelState;// { get; private set; }
       
-      public DragArea dragArea;
       public CardsMgr cardsMgr;
-      public Card curCard;
-      
-      private Dictionary<CardWheelPhase, WheelPhaseBase> cardPlayPhaseMap =
-         new Dictionary<CardWheelPhase, WheelPhaseBase>();
+
+      private Dictionary<CardWheelState, WheelStateBase> cardPlayStateMap =
+         new Dictionary<CardWheelState, WheelStateBase>();
 
       protected override void OnInit()
       {
-          cardPlayPhaseMap.Add(CardWheelPhase.DragWheel, new DragWheelPhase());
-          cardPlayPhaseMap.Add(CardWheelPhase.DragCard, new DragCardPhase());
-          cardPlayPhaseMap.Add(CardWheelPhase.Reset, new ResetPhase());
-          cardPlayPhaseMap.Add(CardWheelPhase.Idle, new IdlePhase());
-          cardPlayPhaseMap.Add(CardWheelPhase.CardNumChange, new CardNumChangePhase());
+          cardPlayStateMap.Add(CardWheelState.DragWheel, new DragWheelState());
+          cardPlayStateMap.Add(CardWheelState.DragCard, new DragCardState());
+          cardPlayStateMap.Add(CardWheelState.ToIdle, new ToIdleState());
+          cardPlayStateMap.Add(CardWheelState.Idle, new IdleState());
+          cardPlayStateMap.Add(CardWheelState.Reset, new ResetState());
       }
 
       public void GameEntry()
       {
          var cardPlay = Object.Instantiate(ResTool.Load<GameObject>("Game")).GetComponent<CardPlayMgr>();
-
-         dragArea = cardPlay.dragArea;
+         
          cardsMgr = cardPlay.cardsMgr;
          
          ChangeGameState(GameState.UnPlaying);
@@ -51,20 +48,24 @@ namespace Game.Core
       
       public void ChangeGameState(GameState gameState)
       {
-         mCurState = gameState;
-         ChangeWheelPhase(CardWheelPhase.Reset);
+         mCurGameState = gameState;
+         ChangeWheelState(CardWheelState.Reset);
       }
       
-      public void ChangeWheelPhase(CardWheelPhase cardWheelPhase)
+      public void ChangeWheelState(CardWheelState cardWheelState)
       {
-         mCurWheelPhase?.OnExit(this);
-         mCurWheelPhase = cardPlayPhaseMap[cardWheelPhase];
-         mCurWheelPhase.OnEnter(this);
+         var preState = mCurWheelState?.GetType().Name;
+         
+         mCurWheelState?.OnExit(this);
+         mCurWheelState = cardPlayStateMap[cardWheelState];
+         mCurWheelState.OnEnter(this);
+         
+         Debug.Log( preState + "->" + mCurWheelState.GetType().Name);
       }
       
       public void OnUpdate(float dt)
       {
-         mCurWheelPhase.OnUpdate(this, dt);
+         mCurWheelState.OnUpdate(this, dt);
       }
       
       public void OnDragCardWheel(Vector2 dragDelta)
@@ -72,6 +73,12 @@ namespace Game.Core
          this.GetModel<CardModel>().dragDelta.Value = dragDelta;
       }
 
+      public bool CheckCurCard(int curCard)
+      {
+         Debug.Log(curCard +"--" + this.GetModel<CardModel>().curCard);
+         return this.GetModel<CardModel>().curCard == curCard;
+      }
+      
       /// <summary>
       /// 返回卡牌组，从0开始，y负半轴开始以逆时针顺序排列
       /// </summary>

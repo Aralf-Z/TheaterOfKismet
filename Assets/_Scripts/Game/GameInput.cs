@@ -1,5 +1,6 @@
 using QFramework;
 using UnityEngine;
+using ZToolKit;
 
 namespace Game.Core
 {   
@@ -36,6 +37,26 @@ namespace Game.Core
             var hit = Physics2D.Raycast(pos, Vector2.zero, 2f, layerMask);
 
             return hit.collider != null;
+        }
+        
+        /// <summary>
+        /// 某物理层级是否覆盖某个坐标
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsOnLayer<T>(Vector3 pos, LayerMask layerMask, out T cmp) where T : MonoBehaviour
+        {
+            cmp = null;
+            var hit = Physics2D.Raycast(pos, Vector2.zero, 2f, layerMask);
+
+            if (hit.collider == null)
+            {
+                return false;
+            }
+            
+            cmp = hit.collider.GetComponent<T>();
+            
+            return true;
+
         }
     }
 } 

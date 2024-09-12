@@ -34,7 +34,7 @@ namespace Game
                 for (int i = 0; i < cardsPack.cardsPack.Length; ++i)
                 {
                     var uiCard = mCardPool.Get();
-                    uiCard.Show(CfgTool.Tables.TbGameCard.Get(cardsPack.cardsPack[i].cardId),cardsPack.cardsPack[i].cardRarity, singleAngle * i);
+                    uiCard.Show(CfgTool.Tables.TbGameCard.Get(cardsPack.cardsPack[i].cardId),cardsPack.cardsPack[i].cardRarity, singleAngle * i, i);
                     cards.Add(i,uiCard);
                 }
             }
@@ -45,12 +45,12 @@ namespace Game
                 for (int i = 0; i < cardsPack.cardsPack.Length; ++i)
                 {
                     var uiCard = mCardPool.Get();
-                    uiCard.Show(CfgTool.Tables.TbUICard.Get(cardsPack.cardsPack[i].cardId), singleAngle * i);
+                    uiCard.Show(CfgTool.Tables.TbUICard.Get(cardsPack.cardsPack[i].cardId), singleAngle * i, i);
                     cards.Add(i,uiCard);
                 }
             }
         }
-        
+
         public IArchitecture GetArchitecture()
         {
             return GameCore.Interface;

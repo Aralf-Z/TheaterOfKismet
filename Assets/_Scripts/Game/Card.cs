@@ -8,12 +8,15 @@ namespace Game
 {
 	public class Card : MonoBehaviour
 		, IController
-		,IObject<Card>
+		, IObject<Card>
 	{
-		private const float kAngleOffset = +90;
-		
 		public CardView view;
 		public int moveSpeed = 10;
+
+		public int CurIndex { get; private set; }
+		
+		private const float kAngleOffset = -90;
+		
 		private float mAngle = 0;
 
 		public void Init()
@@ -26,7 +29,7 @@ namespace Game
 		/// </summary>
 		/// <param name="uiCard"></param>
 		/// <param name="angle"></param>
-		public void Show(UICard uiCard, float angle)
+		public void Show(UICard uiCard, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
 
@@ -36,6 +39,8 @@ namespace Game
 			//angle是以y负半轴为0
 			mAngle = angle + kAngleOffset;
 			cardModel.dragDelta.RegisterWithInitValue(OnWheelMove);
+
+			CurIndex = index;
 		}
 
 		/// <summary>
@@ -44,7 +49,7 @@ namespace Game
 		/// <param name="gameCard"></param>
 		/// <param name="rarity"></param>
 		/// <param name="angle"></param>
-		public void Show(GameCard gameCard, int rarity, float angle)
+		public void Show(GameCard gameCard, int rarity, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
 			
@@ -54,15 +59,23 @@ namespace Game
 			//angle是以y负半轴为0
 			mAngle = angle + kAngleOffset;
 			cardModel.dragDelta.RegisterWithInitValue(OnWheelMove);
+
+			CurIndex = index;
 		}
-		
+
 		/// <summary>
 		/// 设置表现
 		/// </summary>
 		/// <param name="showRatio">0-1的参数</param>
 		private void SetShow(float showRatio)
 		{
-			showRatio = Mathf.Clamp01((showRatio + 4f) /5f);
+			showRatio = Mathf.Clamp(showRatio, .8f, 1.0f);
+
+			if (showRatio > .95f)
+			{
+				this.GetModel<CardModel>().curCard = CurIndex;
+			}
+			
 			view.SetShow(showRatio);
 		}
 		
@@ -72,13 +85,14 @@ namespace Game
 
 			var center = Vector2.zero;
 			var deltaAngle = delta.x * moveSpeed;
-			mAngle -= deltaAngle;
-
+			mAngle = (mAngle - deltaAngle) % 360;
+			
+			
 			float x = center.x + move.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
 			float y = center.y + move.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
 
 			var showRatio = (move.ellipseB - y + center.y) / (2 * move.ellipseB);
-				
+
 			SetShow(showRatio);
 				
 			transform.position = new Vector3(x, y, 0f);

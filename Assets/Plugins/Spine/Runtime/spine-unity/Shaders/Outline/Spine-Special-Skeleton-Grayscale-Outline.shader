@@ -2,7 +2,7 @@
 
 Shader "Spine/Outline/Special/Skeleton Grayscale" {
 	Properties {
-		_GrayPhase ("Phase", Range(0, 1)) = 1
+		_GrayState ("State", Range(0, 1)) = 1
 		[NoScaleOffset] _MainTex ("MainTex", 2D) = "white" {}
 		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0

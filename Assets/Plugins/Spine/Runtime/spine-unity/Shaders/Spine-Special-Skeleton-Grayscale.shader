@@ -4,7 +4,7 @@
 
 Shader "Spine/Special/Skeleton Grayscale" {
 	Properties {
-		_GrayPhase ("Phase", Range(0, 1)) = 1
+		_GrayState ("State", Range(0, 1)) = 1
 		[NoScaleOffset] _MainTex ("MainTex", 2D) = "white" {}
 		_Cutoff ("Shadow alpha cutoff", Range(0,1)) = 0.1
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
@@ -46,7 +46,7 @@ Shader "Spine/Special/Skeleton Grayscale" {
 			#include "UnityCG.cginc"
 			#include "CGIncludes/Spine-Common.cginc"
 			sampler2D _MainTex;
-			float _GrayPhase;
+			float _GrayState;
 
 			struct VertexInput {
 				float4 vertex : POSITION;
@@ -77,7 +77,7 @@ Shader "Spine/Special/Skeleton Grayscale" {
 
 				rawColor.rgb *= i.vertexColor.rgb;
 
-				float3 finalColor = lerp(rawColor.rgb, dot(rawColor.rgb, float3(0.3, 0.59, 0.11)), _GrayPhase);
+				float3 finalColor = lerp(rawColor.rgb, dot(rawColor.rgb, float3(0.3, 0.59, 0.11)), _GrayState);
 				return fixed4(finalColor, finalAlpha);
 			}
 			ENDCG

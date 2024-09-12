@@ -2,7 +2,7 @@ Shader "Spine/SkeletonGraphic Grayscale"
 {
 	Properties
 	{
-		_GrayPhase("Phase", Range(0, 1)) = 1
+		_GrayState("State", Range(0, 1)) = 1
 		[PerRendererData] _MainTex("Sprite Texture", 2D) = "white" {}
 		[Toggle(_STRAIGHT_ALPHA_INPUT)] _StraightAlphaInput("Straight Alpha Texture", Int) = 0
 		[Toggle(_CANVAS_GROUP_COMPATIBLE)] _CanvasGroupCompatible("CanvasGroup Compatible", Int) = 1

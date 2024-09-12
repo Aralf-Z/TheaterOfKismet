@@ -30,10 +30,10 @@ float4 _ClipRect;
 
 #ifdef ENABLE_FILL
 float4 _FillColor;
-float _FillPhase;
+float _FillState;
 #endif
 #ifdef ENABLE_GRAYSCALE
-float _GrayPhase;
+float _GrayState;
 #endif
 
 VertexOutput vert (VertexInput IN) {
@@ -88,10 +88,10 @@ fixed4 frag (VertexOutput IN) : SV_Target
 	#endif
 
 	#ifdef ENABLE_FILL
-	color.rgb = lerp(color.rgb, (_FillColor.rgb * color.a), _FillPhase); // make sure to PMA _FillColor.
+	color.rgb = lerp(color.rgb, (_FillColor.rgb * color.a), _FillState); // make sure to PMA _FillColor.
 	#endif
 	#ifdef ENABLE_GRAYSCALE
-	color.rgb = lerp(color.rgb, dot(color.rgb, float3(0.3, 0.59, 0.11)), _GrayPhase);
+	color.rgb = lerp(color.rgb, dot(color.rgb, float3(0.3, 0.59, 0.11)), _GrayState);
 	#endif
 	return color;
 }
