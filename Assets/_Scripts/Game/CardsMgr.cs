@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using Game.Core;
 using QFramework;
 using UnityEngine;
@@ -10,9 +11,9 @@ namespace Game
         , IController
     {
         /// <summary>
-        /// key:重置卡牌时确定的，卡牌的位序，重置前一直不变；
+        /// key:初始化卡牌时确定的，卡牌的位序；
         /// </summary>
-        public Dictionary<int, Card> cards = new ();
+        private Dictionary<int, Card> mCards = new ();
         
         private MonoBehaviourPool<Card> mCardPool;
         
@@ -21,11 +22,11 @@ namespace Game
             mCardPool = new MonoBehaviourPool<Card>(transform, ResTool.Load<GameObject>("Card"), x => x.Init());
         }
 
-        public void ResetCards()
+        public void InitCards()
         {
             var cardsPack = this.GetSystem<CardSystem>().GetCards();
             
-            cards.Clear();
+            mCards.Clear();
             
             if (cardsPack.gameState == GameState.Playing)
             {
@@ -35,7 +36,7 @@ namespace Game
                 {
                     var uiCard = mCardPool.Get();
                     uiCard.Show(CfgTool.Tables.TbGameCard.Get(cardsPack.cardsPack[i].cardId),cardsPack.cardsPack[i].cardRarity, singleAngle * i, i);
-                    cards.Add(i,uiCard);
+                    mCards.Add(i,uiCard);
                 }
             }
             else if(cardsPack.gameState == GameState.UnPlaying)
@@ -46,11 +47,36 @@ namespace Game
                 {
                     var uiCard = mCardPool.Get();
                     uiCard.Show(CfgTool.Tables.TbUICard.Get(cardsPack.cardsPack[i].cardId), singleAngle * i, i);
-                    cards.Add(i,uiCard);
+                    mCards.Add(i,uiCard);
                 }
             }
         }
 
+        public Card GetCard(int cardIndex)
+        {
+            return mCards[cardIndex];
+        }
+
+        public Card RemoveCard(int cardIndex)
+        {
+            var card = mCards[cardIndex];
+            mCards.Remove(cardIndex);
+            mCardPool.Recycle(card);
+            ResetCard(cardIndex);
+            return card;
+        }
+
+        private void ResetCard(int cardIndex)
+        {
+            var cards = mCards.Keys.OrderByDescending(x => x).ToArray();
+            var singleAngle = 360f / mCards.Count;
+                
+            for (int i = 0; i <  cards.Length; ++i)
+            {
+               mCards[cards[i]].SetAngle(singleAngle * i);
+            }
+        }
+        
         public IArchitecture GetArchitecture()
         {
             return GameCore.Interface;

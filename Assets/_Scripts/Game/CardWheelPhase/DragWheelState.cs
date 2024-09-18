@@ -6,29 +6,27 @@ namespace Game.Core
     /// <summary>
     /// 拖拽卡牌，停止时转向ToIdle
     /// </summary>
-    public class DragWheelState: WheelStateBase
+    public class DragWheelState: WheelStateBase 
     {
-        private Camera mMainCamera = Camera.main;
-        private LayerMask mWheelLayerMask = LayerMask.GetMask("DragArea");
         private Vector2 mPrePosition;
 
         public override void OnEnter(CardSystem cardSystem)
         {
-            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            if (GameInput_2D.TryGetPointOnWorldPos(mMainCamera, out var pos))
             {
                 mPrePosition = pos;
             }
             else
             {
-                cardSystem.ChangeWheelState(CardWheelState.Idle);
+                cardSystem.ChangeWheelState(CardWheelState.ToIdle);
             }
         }
 
         public override void OnUpdate(CardSystem cardSystem, float dt)
         {
-            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            if (GameInput_2D.TryGetPointOnWorldPos(mMainCamera, out var pos))
             {
-                if (GameInput_2D.IsOnLayer(pos, mWheelLayerMask))
+                if (GameInput_2D.IsOnLayer(pos, mDragLayerMask))
                 {
                     var delta = mPrePosition - pos;
                     mPrePosition = pos;
@@ -36,12 +34,12 @@ namespace Game.Core
                 }
                 else
                 {
-                    cardSystem.ChangeWheelState(CardWheelState.Idle);
+                    cardSystem.ChangeWheelState(CardWheelState.ToIdle);
                 }
             }
             else
             {
-                cardSystem.ChangeWheelState(CardWheelState.Idle);
+                cardSystem.ChangeWheelState(CardWheelState.ToIdle);
             }
         }
 

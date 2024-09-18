@@ -698,7 +698,7 @@ namespace QFramework
             {
                 if (value == null && mValue == null) return;
                 if (value != null && Comparer(value, mValue)) return;
-
+                
                 SetValue(value);
                 mOnValueChanged.Trigger(value);
             }

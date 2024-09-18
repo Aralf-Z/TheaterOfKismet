@@ -1,4 +1,5 @@
 using QFramework;
+using UnityEngine;
 
 namespace Game.Core
 {   
@@ -9,17 +10,24 @@ namespace Game.Core
     {
         public override void OnEnter(CardSystem cardSystem)
         {
-            cardSystem.ChangeWheelState(CardWheelState.Idle);
+
         }
 
         public override void OnUpdate(CardSystem cardSystem, float dt)
         {
-            
+            if (GameInput_2D.TryGetPointOnWorldPos(mMainCamera, out var pos) && GameInput_2D.IsOnLayer(pos,mDragLayerMask))
+            {
+                cardSystem.ChangeWheelState(CardWheelState.DragWheel);
+            }
+            else if (cardSystem.CheckToIdle())
+            {
+                cardSystem.ChangeWheelState(CardWheelState.Idle);
+            }
         }
 
         public override void OnExit(CardSystem cardSystem)
         {
-            
+
         }
     }
 } 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using QFramework;
 using ZToolKit;
@@ -28,6 +29,8 @@ namespace Game.Core
       private Dictionary<CardWheelState, WheelStateBase> cardPlayStateMap =
          new Dictionary<CardWheelState, WheelStateBase>();
 
+      private CardWheelState mCurWheelStateLabel;
+
       protected override void OnInit()
       {
           cardPlayStateMap.Add(CardWheelState.DragWheel, new DragWheelState());
@@ -35,6 +38,8 @@ namespace Game.Core
           cardPlayStateMap.Add(CardWheelState.ToIdle, new ToIdleState());
           cardPlayStateMap.Add(CardWheelState.Idle, new IdleState());
           cardPlayStateMap.Add(CardWheelState.Reset, new ResetState());
+          cardPlayStateMap.Add(CardWheelState.StopDragCard, new StopDragCardState());
+          cardPlayStateMap.Add(CardWheelState.OnPlayOrDiscard, new OnPlayOrDiscardState());
       }
 
       public void GameEntry()
@@ -54,13 +59,11 @@ namespace Game.Core
       
       public void ChangeWheelState(CardWheelState cardWheelState)
       {
-         var preState = mCurWheelState?.GetType().Name;
-         
+         LogTool.EditorLog("wheelState", $"{mCurWheelStateLabel} -> {cardWheelState}", Color.cyan);
          mCurWheelState?.OnExit(this);
          mCurWheelState = cardPlayStateMap[cardWheelState];
          mCurWheelState.OnEnter(this);
-         
-         Debug.Log( preState + "->" + mCurWheelState.GetType().Name);
+         mCurWheelStateLabel = cardWheelState;
       }
       
       public void OnUpdate(float dt)
@@ -75,8 +78,35 @@ namespace Game.Core
 
       public bool CheckCurCard(int curCard)
       {
-         Debug.Log(curCard +"--" + this.GetModel<CardModel>().curCard);
          return this.GetModel<CardModel>().curCard == curCard;
+      }
+
+      public void PlayCurCard()
+      {
+         var card = cardsMgr.RemoveCard(this.GetModel<CardModel>().curCard);
+         card.cardEffect.Play();
+      }
+      
+      public void DiscardCurCard()
+      {
+         cardsMgr.RemoveCard(this.GetModel<CardModel>().curCard);
+      }
+      
+      public bool CheckToIdle()
+      {
+         var card = cardsMgr.GetCard(this.GetModel<CardModel>().curCard);
+
+         if (card.Angle > -1.5f && card.Angle < 1.5f)
+         {
+            return true;
+         }
+
+         var ratio = card.Angle > 0 ? 1: -1;
+         var num = card.Angle / 90f;
+
+         OnDragCardWheel(new Vector2(ratio * num * num * 8, 0));
+         
+         return false;
       }
       
       /// <summary>

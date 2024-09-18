@@ -14,11 +14,14 @@ namespace Game
 		public int moveSpeed = 10;
 
 		public int CurIndex { get; private set; }
+		public float Angle => (mAngle - kAngleOffset) % 360;
 		
 		private const float kAngleOffset = -90;
 		
 		private float mAngle = 0;
 
+		public CardEffectBase cardEffect;
+		
 		public void Init()
 		{
 			
@@ -29,6 +32,7 @@ namespace Game
 		/// </summary>
 		/// <param name="uiCard"></param>
 		/// <param name="angle"></param>
+		/// <param name="index"></param>
 		public void Show(UICard uiCard, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
@@ -49,6 +53,7 @@ namespace Game
 		/// <param name="gameCard"></param>
 		/// <param name="rarity"></param>
 		/// <param name="angle"></param>
+		/// <param name="index"></param>
 		public void Show(GameCard gameCard, int rarity, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
@@ -63,13 +68,19 @@ namespace Game
 			CurIndex = index;
 		}
 
+		public void SetAngle(float angle)
+		{
+			mAngle = angle + kAngleOffset;
+		}
+		
 		/// <summary>
 		/// 设置表现
 		/// </summary>
 		/// <param name="showRatio">0-1的参数</param>
 		private void SetShow(float showRatio)
 		{
-			showRatio = Mathf.Clamp(showRatio, .8f, 1.0f);
+			//0-1映射到0.8-1
+			showRatio = showRatio * .2f + .8f;
 
 			if (showRatio > .95f)
 			{
@@ -81,18 +92,16 @@ namespace Game
 		
 		private void OnWheelMove(Vector2 delta)
 		{
-			var move = this.GetModel<CardModel>();
+			var model = this.GetModel<CardModel>();
 
 			var center = Vector2.zero;
 			var deltaAngle = delta.x * moveSpeed;
+			
 			mAngle = (mAngle - deltaAngle) % 360;
+			float x = center.x + model.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
+			float y = center.y + model.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
+			var showRatio = (model.ellipseB - y + center.y) / (2 * model.ellipseB);
 			
-			
-			float x = center.x + move.ellipseA * Mathf.Cos(Mathf.Deg2Rad * mAngle);
-			float y = center.y + move.ellipseB * Mathf.Sin(Mathf.Deg2Rad * mAngle);
-
-			var showRatio = (move.ellipseB - y + center.y) / (2 * move.ellipseB);
-
 			SetShow(showRatio);
 				
 			transform.position = new Vector3(x, y, 0f);

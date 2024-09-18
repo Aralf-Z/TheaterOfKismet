@@ -37,13 +37,21 @@ namespace Game.Core
         StopDragCard = 6,
         
         /// <summary>
-        /// 卡牌打出后
+        /// 卡牌打出或者丢弃后
         /// </summary>
-        OnCardPlay = 7,
+        OnPlayOrDiscard = 7,
     }
 
     public abstract class WheelStateBase
     {
+        protected Camera mMainCamera = Camera.main;
+        protected LayerMask mDragLayerMask = LayerMask.GetMask("DragArea");
+        protected LayerMask mCardLayerMask = LayerMask.GetMask("Card");
+
+        protected WheelStateBase()
+        {
+        }
+
         public abstract void OnEnter(CardSystem cardSystem);
 
         public abstract void OnUpdate(CardSystem cardSystem, float dt);

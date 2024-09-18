@@ -10,7 +10,7 @@ namespace Game.Core
         /// 获得单点触控到屏幕时对应相机的世界位置，仅鼠标左键按下或者触屏第一下
         /// </summary>
         /// <returns></returns>
-        public static bool TryGetOnWorldPos(Camera camera, out Vector2 pos)
+        public static bool TryGetPointOnWorldPos(Camera camera, out Vector2 pos)
         {
             pos = default;
             

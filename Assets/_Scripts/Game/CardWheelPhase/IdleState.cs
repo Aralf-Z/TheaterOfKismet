@@ -8,9 +8,6 @@ namespace Game.Core
     /// </summary>
     public class IdleState : WheelStateBase
     {
-        private Camera mMainCamera = Camera.main;
-        private LayerMask mDragLayerMask = LayerMask.GetMask("DragArea");
-        private LayerMask mCardLayerMask = LayerMask.GetMask("Card");
         private bool mOnDrag;
 
         public override void OnEnter(CardSystem cardSystem)
@@ -20,7 +17,7 @@ namespace Game.Core
 
         public override void OnUpdate(CardSystem cardSystem, float dt)
         {
-            if (GameInput_2D.TryGetOnWorldPos(mMainCamera, out var pos))
+            if (GameInput_2D.TryGetPointOnWorldPos(mMainCamera, out var pos))
             {
                 if (mOnDrag)
                 {
