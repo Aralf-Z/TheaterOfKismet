@@ -9,7 +9,7 @@ namespace Game.Core
     {
         public override void OnEnter(CardSystem cardSystem)
         {
-            cardSystem.cardsMgr.InitCards();
+            cardSystem.CardWheelInit();
             cardSystem.ChangeWheelState(CardWheelState.DragWheel);
         }
 

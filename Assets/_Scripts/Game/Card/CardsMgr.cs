@@ -8,7 +8,6 @@ using ZToolKit;
 namespace Game
 {
     public class CardsMgr : MonoBehaviour
-        , IController
     {
         /// <summary>
         /// key:初始化卡牌时确定的，卡牌的位序；
@@ -21,11 +20,10 @@ namespace Game
         {
             mCardPool = new MonoBehaviourPool<Card>(transform, ResTool.Load<GameObject>("Card"), x => x.Init());
         }
-
-        public void InitCards()
+        
+        public void ResetCards((GameState gameState, (int cardId, int cardRarity)[] cardsPack) cardsPack)
         {
-            var cardsPack = this.GetSystem<CardSystem>().GetCards();
-            
+            mCardPool.Recycle(mCards.Values);
             mCards.Clear();
             
             if (cardsPack.gameState == GameState.Playing)
@@ -39,7 +37,7 @@ namespace Game
                     mCards.Add(i,uiCard);
                 }
             }
-            else if(cardsPack.gameState == GameState.UnPlaying)
+            else if(cardsPack.gameState == GameState.UI)
             {
                 var singleAngle = 360f / cardsPack.cardsPack.Length;
                 
@@ -62,11 +60,11 @@ namespace Game
             var card = mCards[cardIndex];
             mCards.Remove(cardIndex);
             mCardPool.Recycle(card);
-            ResetCard(cardIndex);
+            ResortCard(cardIndex);
             return card;
         }
 
-        private void ResetCard(int cardIndex)
+        private void ResortCard(int cardIndex)
         {
             var cards = mCards.Keys.OrderByDescending(x => x).ToArray();
             var singleAngle = 360f / mCards.Count;
@@ -75,11 +73,6 @@ namespace Game
             {
                mCards[cards[i]].SetAngle(singleAngle * i);
             }
-        }
-        
-        public IArchitecture GetArchitecture()
-        {
-            return GameCore.Interface;
         }
     } 
 } 

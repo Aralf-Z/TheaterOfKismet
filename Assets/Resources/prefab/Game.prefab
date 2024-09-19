@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8931793190564763637}
   - component: {fileID: 8529186242086647862}
   m_Layer: 8
-  m_Name: PlayArea
+  m_Name: PlayUpArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -309,7 +309,7 @@ GameObject:
   - component: {fileID: 4734609843492075474}
   - component: {fileID: 1195006090834766921}
   m_Layer: 9
-  m_Name: DiscardArea
+  m_Name: PlayDownArea
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

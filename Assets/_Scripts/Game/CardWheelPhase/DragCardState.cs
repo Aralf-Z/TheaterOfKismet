@@ -10,8 +10,8 @@ namespace Game.Core
     public class DragCardState : WheelStateBase
     {
         private Card mCardOnDrag;
-        private LayerMask mPlayLayerMask = LayerMask.GetMask("PlayArea");
-        private LayerMask mDiscardLayerMask = LayerMask.GetMask("DiscardArea");
+        private LayerMask mPlayUpLayerMask = LayerMask.GetMask("PlayUpArea");
+        private LayerMask mPlayDownLayerMask = LayerMask.GetMask("PlayDownArea");
 
         public override void OnEnter(CardSystem cardSystem)
         {
@@ -34,14 +34,14 @@ namespace Game.Core
             {
                 mCardOnDrag.transform.position = pos;
 
-                if (GameInput_2D.IsOnLayer(pos, mPlayLayerMask))
+                if (GameInput_2D.IsOnLayer(pos, mPlayUpLayerMask))
                 {
-                    cardSystem.PlayCurCard();
+                    cardSystem.PlayCurCardUp();
                     cardSystem.ChangeWheelState(CardWheelState.OnPlayOrDiscard);
                 }
-                else if(GameInput_2D.IsOnLayer(pos, mDiscardLayerMask))
+                else if(GameInput_2D.IsOnLayer(pos, mPlayDownLayerMask))
                 {
-                    cardSystem.DiscardCurCard();
+                    cardSystem.PlayCurCardDown();
                     cardSystem.ChangeWheelState(CardWheelState.OnPlayOrDiscard);
                 }
             }

@@ -16,11 +16,15 @@ namespace Game
 		public int CurIndex { get; private set; }
 		public float Angle => (mAngle - kAngleOffset) % 360;
 		
-		private const float kAngleOffset = -90;
+		public CardEffectBase CardEffect => CardEffects.CardEffectMap[mCardId];
+		public int CardId => mCardId;
+		public int Rarity => mRarity;
 		
+		private const float kAngleOffset = -90;
 		private float mAngle = 0;
 
-		public CardEffectBase cardEffect;
+		private int mCardId;
+		private int mRarity;
 		
 		public void Init()
 		{
@@ -36,6 +40,8 @@ namespace Game
 		public void Show(UICard uiCard, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
+
+			mCardId = uiCard.Id;
 
 			view.cardFace.sprite = ResTool.Load<Sprite>(uiCard.FaceRes);
 			view.frame.sprite = ResTool.Load<Sprite>(uiCard.FrameRes);
@@ -57,6 +63,9 @@ namespace Game
 		public void Show(GameCard gameCard, int rarity, float angle, int index)
 		{
 			var cardModel = this.GetModel<CardModel>();
+
+			mCardId = gameCard.Id;
+			mRarity = rarity;
 			
 			view.cardFace.sprite = ResTool.Load<Sprite>(gameCard.FaceRes);
 			view.frame.sprite = ResTool.Load<Sprite>(CfgTool.CardSValue.FrameRes[rarity]);
