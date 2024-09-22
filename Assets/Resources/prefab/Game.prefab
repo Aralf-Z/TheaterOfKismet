@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1482867756934340096
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2734197521390933856}
+  - component: {fileID: 6942241603948940610}
+  m_Layer: 0
+  m_Name: UICards
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2734197521390933856
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482867756934340096}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3565326316868394694}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6942241603948940610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1482867756934340096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a42825a6a4655454ca1eb22d392c1d20, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3337711832473025060
 GameObject:
   m_ObjectHideFlags: 0
@@ -57,9 +101,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3565326316301132736}
-  - component: {fileID: 3565326316301132739}
+  - component: {fileID: 2693853299511505933}
   m_Layer: 0
-  m_Name: Cards
+  m_Name: GameCards
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +124,7 @@ Transform:
   m_Father: {fileID: 3565326316868394694}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3565326316301132739
+--- !u!114 &2693853299511505933
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -89,7 +133,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3565326316301132737}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a652772f0db49df43a99ddbe00ae498d, type: 3}
+  m_Script: {fileID: 11500000, guid: 28f19110fa8b9b240b90d8e90a0de723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &3565326316341388548
@@ -210,6 +254,7 @@ Transform:
   - {fileID: 4734609843492075474}
   - {fileID: 3565326317186936457}
   - {fileID: 3565326316301132736}
+  - {fileID: 2734197521390933856}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -226,7 +271,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dragArea: {fileID: 3565326317186936459}
-  cardsMgr: {fileID: 3565326316301132739}
+  gameCardsMgr: {fileID: 2693853299511505933}
+  uiCardsMgr: {fileID: 6942241603948940610}
 --- !u!1 &3565326317186936462
 GameObject:
   m_ObjectHideFlags: 0

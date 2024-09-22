@@ -13,6 +13,7 @@ namespace Game.Core
         {
             RegisterModel(new CardModel());
             RegisterSystem(new CardSystem());
+            RegisterSystem(new GamePlaySystem());
         }
     }
 } 

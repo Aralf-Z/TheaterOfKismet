@@ -1,0 +1,17 @@
+[
+  {
+    "menus": "MainMenu",
+    "cards": [
+      101,
+      102
+    ]
+  },
+  {
+    "menus": "Settings",
+    "cards": [
+      104,
+      106,
+      103
+    ]
+  }
+]

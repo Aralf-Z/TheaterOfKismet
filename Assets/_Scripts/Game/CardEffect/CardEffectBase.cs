@@ -1,7 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using cfg;
 using QFramework;
+using ZToolKit;
 
 namespace Game.Core
 {
@@ -23,16 +25,53 @@ namespace Game.Core
         }
     }
 
-    public abstract class CardEffectBase
+    public abstract class CardEffectBase:
+        ICanGetSystem
     {
         public abstract int CardId { get; }
-        public abstract void PlayUp();
-        public abstract void PlayDown();
+        public abstract void PlayUp(Card card);
+        public abstract void PlayDown(Card card);
+        public IArchitecture GetArchitecture()
+        {
+            return GameCore.Interface;
+        }
     }
 
-    public abstract class GameCardEffectBase: CardEffectBase
+    public abstract class CardEffect_DownDiscard: CardEffectBase
     {
-        public override void PlayDown()
-        { }
+        protected GameCard mGameCard => CfgTool.Tables.TbGameCard[CardId];
+        
+        public override void PlayDown(Card card) { }
+    }
+
+    public class CardEffect_201 : CardEffect_DownDiscard
+    {
+        public override int CardId => 201;
+
+        public override void PlayUp(Card card)
+        {
+            this.GetSystem<GamePlaySystem>()
+                .AddBuff(new Buff_201(mGameCard.Paras[card.Rarity][0], mGameCard.Paras[card.Rarity][1]));
+        }
+    }
+
+    public class CardEffect_202 : CardEffect_DownDiscard
+    {
+        public override int CardId => 202;
+        
+        public override void PlayUp(Card card)
+        {
+            
+        }
+    }
+    
+    public class CardEffect_203 : CardEffect_DownDiscard
+    {
+        public override int CardId => 203;
+        
+        public override void PlayUp(Card card)
+        {
+            
+        }
     }
 } 

@@ -18,6 +18,7 @@ public partial class Tables
     public TbL10nUI TbL10nUI {get; }
     public TbL10nGame TbL10nGame {get; }
     public TbUICard TbUICard {get; }
+    public TbUICfg TbUICfg {get; }
     public TbGameCard TbGameCard {get; }
     public TbCardProbs TbCardProbs {get; }
     public TbCardSValue TbCardSValue {get; }
@@ -28,6 +29,7 @@ public partial class Tables
         TbL10nUI = new TbL10nUI(loader("tbl10nui"));
         TbL10nGame = new TbL10nGame(loader("tbl10ngame"));
         TbUICard = new TbUICard(loader("tbuicard"));
+        TbUICfg = new TbUICfg(loader("tbuicfg"));
         TbGameCard = new TbGameCard(loader("tbgamecard"));
         TbCardProbs = new TbCardProbs(loader("tbcardprobs"));
         TbCardSValue = new TbCardSValue(loader("tbcardsvalue"));
@@ -40,6 +42,7 @@ public partial class Tables
         TbL10nUI.ResolveRef(this);
         TbL10nGame.ResolveRef(this);
         TbUICard.ResolveRef(this);
+        TbUICfg.ResolveRef(this);
         TbGameCard.ResolveRef(this);
         TbCardProbs.ResolveRef(this);
         TbCardSValue.ResolveRef(this);

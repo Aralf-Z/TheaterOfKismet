@@ -9,7 +9,8 @@ namespace Game
         , IController
     {
         public DragArea dragArea;
-        public CardsMgr cardsMgr;
+        public GameCardMgr gameCardsMgr;
+        public UICardsMgr uiCardsMgr;
         
         private CardSystem mCardSystem;
 

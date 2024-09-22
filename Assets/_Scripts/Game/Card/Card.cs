@@ -91,11 +91,6 @@ namespace Game
 			//0-1映射到0.8-1
 			showRatio = showRatio * .2f + .8f;
 
-			if (showRatio > .95f)
-			{
-				this.GetModel<CardModel>().curCard = CurIndex;
-			}
-			
 			view.SetShow(showRatio);
 		}
 		

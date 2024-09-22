@@ -9,8 +9,6 @@ namespace Game.Core
    //todo 实质上这个系统有点像游戏管理器了，他即管理游玩状态，又管理游戏流程，需要拆解一下
    public class CardSystem : AbstractSystem
    {
-      private CardsMgr mCardsMgr;
-      
       private Dictionary<CardWheelState, WheelStateBase> mCardPlayStateMap = new Dictionary<CardWheelState, WheelStateBase>();
       private Dictionary<GameState, GameStateHandlerBase> mGameStateMap = new Dictionary<GameState, GameStateHandlerBase>();
       private WheelStateBase mCurWheelState;
@@ -25,9 +23,6 @@ namespace Game.Core
           mCardPlayStateMap.Add(CardWheelState.Reset, new ResetState());
           mCardPlayStateMap.Add(CardWheelState.StopDragCard, new StopDragCardState());
           mCardPlayStateMap.Add(CardWheelState.OnPlayOrDiscard, new OnPlayOrDiscardState());
-          
-          mGameStateMap.Add(GameState.Playing, new PlayingStateHandler());
-          mGameStateMap.Add(GameState.UI, new UIStateHandler());
       }
 
       /// <summary>
@@ -38,9 +33,12 @@ namespace Game.Core
          var cardPlay = Object.Instantiate(ResTool.Load<GameObject>("Game")).GetComponent<CardPlayMgr>();
          
          CardEffects.Init();
-         mCardsMgr = cardPlay.cardsMgr;
+         
+         mGameStateMap.Add(GameState.Playing, new PlayingStateHandler(cardPlay.gameCardsMgr));
+         mGameStateMap.Add(GameState.UI, new UIStateHandler(cardPlay.uiCardsMgr));
          
          ChangeGameState(GameState.UI);
+         ChangeWheelState(CardWheelState.Idle);
       }
       
       #region CardState
@@ -51,14 +49,15 @@ namespace Game.Core
       /// <param name="gameState"></param>
       public void ChangeGameState(GameState gameState)
       {
-         mCurGameHandler?.OnExit(this);
+         LogTool.EditorLog("游戏状态", $"--> {gameState}");
+         mCurGameHandler?.OnExit();
          mCurGameHandler = mGameStateMap[gameState];
-         mCurGameHandler?.OnEnter(this);
+         mCurGameHandler?.OnEnter();
       }
 
       public void CardWheelInit()
       {
-         mCardsMgr.ResetCards(GetCards());
+         
       }
 
       /// <summary>
@@ -66,8 +65,7 @@ namespace Game.Core
       /// </summary>
       public void PlayCurCardUp()
       {
-         var card = mCardsMgr.RemoveCard(this.GetModel<CardModel>().curCard);
-         card.CardEffect.PlayUp();
+         mCurGameHandler.PlayCurCardUp();
       }
       
       /// <summary>
@@ -75,21 +73,7 @@ namespace Game.Core
       /// </summary>
       public void PlayCurCardDown()
       {
-         var card = mCardsMgr.RemoveCard(this.GetModel<CardModel>().curCard);
-         card.CardEffect.PlayDown();
-      }
-
-      /// <summary>
-      /// 返回卡牌组，从0开始，y负半轴开始以逆时针顺序排列
-      /// </summary>
-      /// <returns>
-      ///  游戏卡牌的稀有度不是读表格所以返回的数组
-      /// </returns>
-      public (GameState gameState, (int cardId, int cardRarity)[] cardsPack) GetCards()
-      {
-         var cardsPack = new (int,int)[] {(1,3),(2,2),(6,0),(9,1)};
-
-         return (GameState.Playing, cardsPack);
+         mCurGameHandler.PlayCurCardDown();
       }
 
       #endregion
@@ -102,6 +86,7 @@ namespace Game.Core
       /// <param name="cardWheelState"></param>
       public void ChangeWheelState(CardWheelState cardWheelState)
       {
+         LogTool.EditorLog("卡牌轮状态", $"--> {cardWheelState}");
          mCurWheelState?.OnExit(this);
          mCurWheelState = mCardPlayStateMap[cardWheelState];
          mCurWheelState.OnEnter(this);
@@ -124,6 +109,7 @@ namespace Game.Core
       {
          //todo 差值的本质是基于qf的BindableProperty，但该特性只接受变化值，即如果每一帧的传入的delta相同会导致无法触发的bug
          this.GetModel<CardModel>().dragDelta.Value = dragDelta;
+         mCurGameHandler.UpdateCurCard();
       }
       
       /// <summary>
@@ -133,7 +119,7 @@ namespace Game.Core
       /// <returns></returns>
       public bool CheckCurCard(int curCardIndex)
       {
-         return this.GetModel<CardModel>().curCard == curCardIndex;
+         return mCurGameHandler.CurCard == curCardIndex;
       }
       
       /// <summary>
@@ -142,15 +128,15 @@ namespace Game.Core
       /// <returns>可处于闲置</returns>
       public bool CheckToIdle()
       {
-         var card = mCardsMgr.GetCard(this.GetModel<CardModel>().curCard);
-
-         if (card.Angle > -1.5f && card.Angle < 1.5f)
+         var angle = mCurGameHandler.GetCurCardAngle();
+         
+         if (angle > -1.5f && angle < 1.5f)
          {
             return true;
          }
-
-         var ratio = card.Angle > 0 ? 1: -1;
-         var num = card.Angle / 90f;
+         
+         var ratio = angle > 0 ? 1: -1;
+         var num = angle / 90f;
 
          OnDragCardWheel(new Vector2(ratio * num * num * 8, 0));
          
